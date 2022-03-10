@@ -1,24 +1,38 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 function SignIn() {
-  const [user, setUser] = useState("");
   const [redirect, setRedirect] = useState(false)
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  })
+
+  const handleChange = (event) => {
+    const newData = {...data}
+    newData[event.target.id] = event.target.value
+    setData(newData)
+    console.log(newData);
+  }
 
   const submit = async (event) => {
     event.preventDefault()
-    const userJson = JSON.stringify(user)
-    
+    // const formData = new FormData(event.target)
 
+    // formData.set('email', formData.get(`${event.target.email.value}`));
+    // formData.set('password', formData.get(`${event.target.password.value}`));
+
+    console.log(data)
+    
     await axios
-      .post('https://crowdfunding-server.herokuapp.com/api/v1.0/users/login', userJson, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
+      .post('http://localhost:8080/api/v1.0/users/login', data, {
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // }
       })
-      .then((res) => {
-        if (res.data.id !== null) {
+      .then((res) =>  {
+        if (res.status === 200) {
           localStorage.setItem('signedInUser', JSON.stringify(res.data))
           setRedirect(true);
         } else {
@@ -43,7 +57,9 @@ function SignIn() {
           <input
             type="email;"
             placeholder="Email"
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            id="email"
+            value={data.email}
+            onChange={(event) => handleChange(event)}
             required
           />
         </span>
@@ -53,7 +69,9 @@ function SignIn() {
           <input
             type="password"
             placeholder="Password"
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            id="password"
+            value={data.password}
+            onChange={(event) => handleChange(event)}
             required
           />
         </span>

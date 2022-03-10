@@ -1,17 +1,19 @@
 import React from 'react'
 import axios from 'axios'
 import { Base64 } from 'js-base64'
+import Cookies from 'universal-cookie'
 
 const fetchProjects = async() => {
   const authenticatedUser = JSON.parse(localStorage.getItem('signedInUser'))
-  console.log(authenticatedUser)
+  
+  var token = cookies.get('JSESSIONID');
 
-  console.log(`Basic ${`${authenticatedUser.userName}:${authenticatedUser.password}`}`)
-
-  const data = await axios.get('https://crowdfunding-server.herokuapp.com/api/v1.0/projects', {
+  const data = await axios.get('http://localhost:8080/api/v1.0/projects', {
+    // body: JSON.stringify(credentials),
     headers:{
       'Content-Type': 'multipart/encrypted',
-      'Authorization': `Basic ${`${authenticatedUser.userName}:${authenticatedUser.password}`}`
+      'Authorization': `Bearer ${token}`
+      // 'Authorization': `Basic ${`${authenticatedUser.userName}:${authenticatedUser.password}`}`
       
     }
   })

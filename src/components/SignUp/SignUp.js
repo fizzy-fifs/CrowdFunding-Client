@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
-import addNotification from "../notifications/Notifications";
 import Cookies from 'universal-cookie';
 
 function SignUp() {
@@ -23,7 +22,7 @@ function SignUp() {
       })
       .then((res) =>  {
         if (res.data === 'User created successfully') {
-          cookies.set('user', res.data)
+          localStorage.setItem('signedInUser', JSON.stringify(res.data))
           setRedirect(true);
           console.log(res.data)
         } else {
@@ -37,7 +36,7 @@ function SignUp() {
   };
   
   if (redirect) {
-      return <Navigate to='/home' />
+    return <Navigate to='/home' />
  }
 
   return (
@@ -58,7 +57,7 @@ function SignUp() {
           <input
             type="text"
             placeholder="Username"
-            onChange={(e) => setUser({ ...user, username: e.target.value })}
+            onChange={(e) => setUser({ ...user, userName: e.target.value })}
             required
           />
         </span>

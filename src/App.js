@@ -8,7 +8,7 @@ import Home from './components/Home/Home';
 import projectIsNotInLocalStorage from './helpers/projectIsNotInLocalStorage'
 import setProjectsToStorage from './setToStorage/setProjectsToStorage';
 
-if (projectIsNotInLocalStorage()) {
+if (localStorage.getItem('signedInUser') !== null && projectIsNotInLocalStorage()) {
   setProjectsToStorage()
 }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
+import setProjectsToStorage from "../../setToStorage/setProjectsToStorage";
 
 function SignIn() {
   const [redirect, setRedirect] = useState(false)
@@ -13,7 +14,6 @@ function SignIn() {
     const newData = {...data}
     newData[event.target.id] = event.target.value
     setData(newData)
-    console.log(newData);
   }
 
   const submit = async (event) => {
@@ -26,14 +26,11 @@ function SignIn() {
     console.log(data)
     
     await axios
-      .post('http://localhost:8080/api/v1.0/users/login', data, {
-        // headers: {
-        //   'Content-Type': 'multipart/form-data',
-        // }
-      })
+      .post('https://crowdfunding-server.herokuapp.com/api/v1.0/users/login', data,  )
       .then((res) =>  {
         if (res.status === 200) {
-          localStorage.setItem('signedInUser', JSON.stringify(res.data))
+          localStorage.setItem('signedInUser', JSON.stringify(res.data.user))
+          localStorage.setItem('jwt', JSON.stringify(res.data.jwt))
           setRedirect(true);
         } else {
           console.log(res.data)
@@ -42,6 +39,7 @@ function SignIn() {
   }
 
   if (redirect) {
+    setProjectsToStorage()
     return <Navigate to='/home' />
   }
 

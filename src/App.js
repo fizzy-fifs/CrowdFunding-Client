@@ -1,16 +1,18 @@
 import './App.css';
-import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router,Route, Routes, Navigate } from "react-router-dom";
 import {AnimatePresence} from 'framer-motion';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
 import LandingPage from './pages/landing-page/LandingPage';
-import Home from './components/Home/Home';
+import Home from './pages/Home/Home';
 import projectIsNotInLocalStorage from './helpers/projectIsNotInLocalStorage'
 import setProjectsToStorage from './setToStorage/setProjectsToStorage';
 
+if (localStorage.getItem('signedInUser' !== null)) { <Navigate to='/home' /> }
+
 if (localStorage.getItem('signedInUser') !== null && projectIsNotInLocalStorage()) {
-  setProjectsToStorage()
-}
+    setProjectsToStorage()
+  }
 
 function App() {
   return (

@@ -14,15 +14,16 @@ function SignUp() {
     const userJson = JSON.stringify(user)
 
     await axios.post(
-      "https://crowdfunding-server.herokuapp.com/api/v1.0/users/newuser", userJson,
+      "https://crowdfunding-server.herokuapp.com/api/v1.0/users/newuser", userJson,  
       {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((res) =>  {
-        if (res.data === 'User created successfully') {
-          localStorage.setItem('signedInUser', JSON.stringify(res.data))
+        if (res.status === 200) {
+          localStorage.setItem('signedInUser', JSON.stringify(res.data.user))
+          localStorage.setItem('jwt', JSON.stringify(res.data.jwt))
           setRedirect(true);
           console.log(res.data)
         } else {

@@ -1,7 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { Base64 } from 'js-base64'
-import Cookies from 'universal-cookie'
 
 const fetchProjects = async() => {  
   var jwtToken = localStorage.getItem("jwt")

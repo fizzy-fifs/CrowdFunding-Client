@@ -1,30 +1,10 @@
 import axios from "axios";
 import { React, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
+import registerABusinessApiCall from "../../apiCalls/registerABusinessApiCall";
 
 function RegisterBusiness() {
   const [modalState, setModalState] = useState(false);
-
-  const submit = async (event) => {
-    event.preventDefault();
-
-    let user = JSON.parse(localStorage.getItem("signedInUser"));
-
-    const formData = new FormData(event.target);
-
-    formData.set("name", formData.get("businessName"));
-    formData.set("description", formData.get("description"));
-
-    await axios
-    .post('https://fundedlocal-server.herokuapp.com/api/v1.0/businesses/newbusiness', formData, {
-			headers: { 'content-type': 'multipart/form-data' }
-      }
-    ).then((res) => {
-      if (res.status === 200) {
-        localStorage.setItem("business", JSON.parse(res.data))
-      }
-    })
-  };
 
   return (
     <div className="RegisterBusinessContainer">
@@ -40,7 +20,7 @@ function RegisterBusiness() {
         isOpen={modalState}
         onRequestClose={() => setModalState(false)}
       >
-        <form onSubmit={submit}>
+        <form onSubmit={registerABusinessApiCall(event)}>
           <label>
             <input
               type="text"

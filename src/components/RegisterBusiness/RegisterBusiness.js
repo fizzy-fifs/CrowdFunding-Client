@@ -9,21 +9,34 @@ function RegisterBusiness() {
 
   const submit = async (event) => {
     event.preventDefault();
-    let user = JSON.parse(localStorage.getItem("signedInUser"));
-    // const formData = new FormData(event.target);
+    let user = localStorage.getItem('signedInUser');
 
-    // formData.set("name", formData.get("businessName"));
-    // formData.set('owner', user);
-    // formData.set("description", formData.get("description"));
-    let bankAccount = {}
-    business.owner = user;
-    // business.images = files;
-    business.bankAccount = bankAccount;
-    let businessJson = JSON.stringify(business)
+    console.log(user)
+    console.log(user.id)
+    
+    const formData = new FormData(event.target);
+
+    formData.set("name", formData.get("businessName"));
+    formData.set('user', user.id);
+    formData.set("description", formData.get("description"));
+    // formData.set('bankAccount', {name: "Fifolu"});
+
+    for (let i = 0; i < files.length; i++) {
+			formData.append(`images[${i}]`, files[i]);
+		}
+
+		for (var pair of formData.entries()) {
+			console.log(pair[0] + ', ' + pair[1]);
+		}
+
+    // let bankAccount = {}
+    // business.owner = user;
+    // // business.images = files;
+    // business.bankAccount = bankAccount;
+    // let businessJson = JSON.stringify(business)
     // let imagesJson = JSON.stringify(files)
 
-    registerABusinessApiCall(businessJson, 
-    files)
+    registerABusinessApiCall(formData)
   }
 
   return (
@@ -47,7 +60,7 @@ function RegisterBusiness() {
               type="text"
               placeholder="What is the name of your business"
               name="businessName"
-              onChange={(e) => setBusiness({ ...business, name: e.target.value })}
+              // onChange={(e) => setBusiness({ ...business, name: e.target.value })}
               required
             />
           </label>
@@ -57,7 +70,8 @@ function RegisterBusiness() {
               name="description"
               placeholder="Describe the nature of your business"
               style={{ height: 150 }}
-              onChange={(e) => setBusiness({ ...business, description: e.target.value })}
+              // onChange={(e) => setBusiness({ ...business, description: e.target.value })}
+              required
             />
           </label>
           <br/>

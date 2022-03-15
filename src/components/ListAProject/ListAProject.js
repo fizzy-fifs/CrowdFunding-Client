@@ -53,7 +53,7 @@ function ListAProject() {
             isOpen={modalState}
             onRequestClose={() => setModalState(false)}
           >
-            <form onSubmit={submit()}>
+            <form onSubmit={submit}>
               <label>
                 <input
                   type="text"
@@ -123,7 +123,8 @@ function ListAProject() {
                   name="images"
                   onChange={(event) => setFiles([ ...files, event.target.files])}
                 />
-          </label>
+          </label><br/>
+            <input type="submit" value="Submit" />
 
             </form>
           </Modal>

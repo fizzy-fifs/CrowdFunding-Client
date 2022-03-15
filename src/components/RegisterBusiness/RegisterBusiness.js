@@ -4,22 +4,26 @@ import registerABusinessApiCall from "../../apiCalls/registerABusinessApiCall";
 
 function RegisterBusiness() {
   const [modalState, setModalState] = useState(false);
+  const [business, setBusiness] = useState({})
   const [files, setFiles] = useState([])
 
   const submit = async (event) => {
     event.preventDefault();
     let user = JSON.parse(localStorage.getItem("signedInUser"));
-    const formData = new FormData(event.target);
+    // const formData = new FormData(event.target);
 
-    formData.set("name", formData.get("businessName"));
-    formData.set("description", formData.get("description"));
-    formData.set('owner', user)
+    // formData.set("name", formData.get("businessName"));
+    // formData.set('owner', user);
+    // formData.set("description", formData.get("description"));
+    let bankAccount = {}
+    business.owner = user;
+    // business.images = files;
+    business.bankAccount = bankAccount;
+    let businessJson = JSON.stringify(business)
+    // let imagesJson = JSON.stringify(files)
 
-    for (let i = 0; i < files.length; i++) {
-      formData.append("images[]", files[i])
-    }
-
-    registerABusinessApiCall(formData)
+    registerABusinessApiCall(businessJson, 
+    files)
   }
 
   return (
@@ -35,13 +39,16 @@ function RegisterBusiness() {
         className="RegisterBusinessModal"
         isOpen={modalState}
         onRequestClose={() => setModalState(false)}
+        // appElement={el}
       >
-        <form onSubmit={submit()}>
+        <form onSubmit={submit}>
           <label>
             <input
               type="text"
               placeholder="What is the name of your business"
               name="businessName"
+              onChange={(e) => setBusiness({ ...business, name: e.target.value })}
+              required
             />
           </label>
           <br />
@@ -50,6 +57,7 @@ function RegisterBusiness() {
               name="description"
               placeholder="Describe the nature of your business"
               style={{ height: 150 }}
+              onChange={(e) => setBusiness({ ...business, description: e.target.value })}
             />
           </label>
           <br/>
@@ -61,7 +69,8 @@ function RegisterBusiness() {
               name="images"
               onChange={(event) => setFiles([ ...files, event.target.files])}
             />
-          </label>
+          </label><br/>
+          <input type="submit" value="Submit" />
 
         </form>
       </Modal>

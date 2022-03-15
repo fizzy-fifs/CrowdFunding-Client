@@ -14,7 +14,7 @@ function SignUp() {
     const userJson = JSON.stringify(user)
 
     await axios.post(
-      "https://crowdfunding-server.herokuapp.com/api/v1.0/users/newuser", userJson,  
+      "https://fundedlocal-server.herokuapp.com/api/v1.0/users/newuser", userJson,  
       {
         headers: {
           "Content-Type": "application/json",

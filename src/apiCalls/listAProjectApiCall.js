@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const listAProjectApiCall = async(event) => {
+const listAProjectApiCall = async(formData) => {
 
   var jwtToken = localStorage.getItem("jwt")
   jwtToken = jwtToken ? jwtToken.replace(/^"(.*)"$/, '$1') : null

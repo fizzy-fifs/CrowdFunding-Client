@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-const fetchProjects = async() => {  
+const fetchBusinesses = async() => {  
   var jwtToken = localStorage.getItem("jwt")
   jwtToken = jwtToken ? jwtToken.replace(/^"(.*)"$/, '$1') : null
 
@@ -15,4 +15,4 @@ const fetchProjects = async() => {
   return data;
 }
 
-export default fetchProjects
+export default fetchBusinesses

@@ -6,11 +6,32 @@ import RegisterBusiness from "../RegisterBusiness/RegisterBusiness";
 
 function ListAProject() {
   const [modalState, setModalState] = useState(false);
+  const [files, setFiles] = useState([])
 
   let user = JSON.parse(localStorage.getItem("signedInUser"));
 
   const getBusinessId = (business) => {
     return business._id;
+  }
+
+  const submit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    formData.set('title', formData.get("projectTitle"))
+    formData.set('category', formData.get("category"))
+    formData.set('description', formData.get("description"))
+    formData.set('goal', formData.get("goal"))
+    formData.set('endDate', formData.get("endDate"))
+    formData.set('projectOwner', formData.get("associatedBusiness"))
+    // formData.set('businessId', getBusinessId())
+
+    for (let i = 0; i < files.length; i++) {
+      formData.append("images[]", files[i])
+    }
+
+    listAProjectApiCall(formData)
   }
 
   {
@@ -32,7 +53,7 @@ function ListAProject() {
             isOpen={modalState}
             onRequestClose={() => setModalState(false)}
           >
-            <form onSubmit={listAProjectApiCall(event)}>
+            <form onSubmit={submit()}>
               <label>
                 <input
                   type="text"
@@ -94,6 +115,16 @@ function ListAProject() {
                   )})}
                 </select>
               </label>
+
+              <label>
+                <input
+                  type="file"
+                  placeholder="Upload Multimedia"
+                  name="images"
+                  onChange={(event) => setFiles([ ...files, event.target.files])}
+                />
+          </label>
+
             </form>
           </Modal>
         </div>

@@ -1,15 +1,7 @@
 import React from "react";
+import axios from "axios";
 
-const registerABusinessApiCall = async (event) => {
-  event.preventDefault();
-
-  let user = JSON.parse(localStorage.getItem("signedInUser"));
-
-  const formData = new FormData(event.target);
-
-  formData.set("name", formData.get("businessName"));
-  formData.set("description", formData.get("description"));
-  formData.set('owner', user)
+const registerABusinessApiCall = async (formData) => {
 
   var jwtToken = localStorage.getItem("jwt")
   jwtToken = jwtToken ? jwtToken.replace(/^"(.*)"$/, '$1') : null

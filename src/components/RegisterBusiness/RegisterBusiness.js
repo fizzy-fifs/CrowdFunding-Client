@@ -1,95 +1,89 @@
 import { React, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
+import { Navigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 import registerABusinessApiCall from "../../apiCalls/registerABusinessApiCall";
+import SignIn from "../SignIn/SignIn";
 
 function RegisterBusiness() {
   const [modalState, setModalState] = useState(false);
-  const [business, setBusiness] = useState({})
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState([]);
+  let cookies = new Cookies();
+  let user = cookies.get("signedInUser") || "";
 
-  const submit = async (event) => {
+  const submit = async (event, user) => {
     event.preventDefault();
-    let user = localStorage.getItem('signedInUser');
-
-    console.log(user)
-    console.log(user.id)
-    
     const formData = new FormData(event.target);
 
     formData.set("name", formData.get("businessName"));
-    formData.set('user', user.id);
+    formData.set("userId", user.id);
     formData.set("description", formData.get("description"));
     // formData.set('bankAccount', {name: "Fifolu"});
 
     for (let i = 0; i < files.length; i++) {
-			formData.append(`images[${i}]`, files[i]);
-		}
+      formData.append(`images[${i}]`, files[i]);
+    }
 
-		for (var pair of formData.entries()) {
-			console.log(pair[0] + ', ' + pair[1]);
-		}
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+    await registerABusinessApiCall(formData);
+    window.location.reload();
+  };
 
-    // let bankAccount = {}
-    // business.owner = user;
-    // // business.images = files;
-    // business.bankAccount = bankAccount;
-    // let businessJson = JSON.stringify(business)
-    // let imagesJson = JSON.stringify(files)
+  if (user === "") {
+    return <SignIn />;
+  } else {
+    return (
+      <div className="RegisterBusinessContainer">
+        <div
+          className="RegisterBusinessButton"
+          onClick={() => setModalState(true)}
+        >
+          <button>Register a Business</button>
+        </div>
 
-    registerABusinessApiCall(formData)
-  }
+        <Modal
+          className="RegisterBusinessModal"
+          isOpen={modalState}
+          onRequestClose={() => setModalState(false)}
+        >
+          <form onSubmit={(event) => submit(event, user)}>
+            <label>
+              <input
+                type="text"
+                placeholder="What is the name of your business"
+                name="businessName"
+                required
+              />
+            </label>
+            <br />
+            <label>
+              <textarea
+                name="description"
+                placeholder="Describe the nature of your business"
+                style={{ height: 150 }}
+                required
+              />
+            </label>
+            <br />
 
-  return (
-    <div className="RegisterBusinessContainer">
-      <div
-        className="RegisterBusinessButton"
-        onClick={() => setModalState(true)}
-      >
-        <button>Register a Business</button>
+            <label>
+              <input
+                type="file"
+                multiple
+                placeholder="Upload Multimedia"
+                name="images"
+                onChange={(event) => setFiles([...files, event.target.files])}
+              />
+            </label>
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
+        </Modal>
       </div>
-
-      <Modal
-        className="RegisterBusinessModal"
-        isOpen={modalState}
-        onRequestClose={() => setModalState(false)}
-        // appElement={el}
-      >
-        <form onSubmit={submit}>
-          <label>
-            <input
-              type="text"
-              placeholder="What is the name of your business"
-              name="businessName"
-              // onChange={(e) => setBusiness({ ...business, name: e.target.value })}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            <textarea
-              name="description"
-              placeholder="Describe the nature of your business"
-              style={{ height: 150 }}
-              // onChange={(e) => setBusiness({ ...business, description: e.target.value })}
-              required
-            />
-          </label>
-          <br/>
-
-          <label>
-            <input
-              type="file"
-              placeholder="Upload Multimedia"
-              name="images"
-              onChange={(event) => setFiles([ ...files, event.target.files])}
-            />
-          </label><br/>
-          <input type="submit" value="Submit" />
-
-        </form>
-      </Modal>
-    </div>
-  );
+    );
+  }
 }
 
 export default RegisterBusiness;

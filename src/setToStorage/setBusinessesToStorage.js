@@ -1,4 +1,3 @@
-import React from 'react'
 import fetchBusinesses from '../apiCalls/fetchBusinesses'
 
 const setBusinessesToStorage = async () => {

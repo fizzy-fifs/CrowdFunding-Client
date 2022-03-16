@@ -1,9 +1,9 @@
-import React from 'react'
 import axios from 'axios'
+import Cookies from 'universal-cookie'
 
 const fetchProjects = async() => {  
-  var jwtToken = localStorage.getItem("jwt")
-  jwtToken = jwtToken ? jwtToken.replace(/^"(.*)"$/, '$1') : null
+  let cookies = new Cookies();
+  var jwtToken = cookies.get("jwt")
 
   const data = await axios.get('https://fundedlocal-server.herokuapp.com/api/v1.0/projects', {
     headers:{

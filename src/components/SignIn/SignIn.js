@@ -1,7 +1,9 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 import setProjectsToStorage from "../../setToStorage/setProjectsToStorage";
+import setBusinessesToStorage from "../../setToStorage/setBusinessesToStorage";
 
 function SignIn() {
   const [redirect, setRedirect] = useState(false)
@@ -9,6 +11,8 @@ function SignIn() {
     email: "",
     password: ""
   })
+
+  let cookies = new Cookies();
 
   const handleChange = (event) => {
     const newData = {...data}
@@ -29,8 +33,8 @@ function SignIn() {
       .post('https://fundedlocal-server.herokuapp.com/api/v1.0/users/login', data,  )
       .then((res) =>  {
         if (res.status === 200) {
-          localStorage.setItem('signedInUser', JSON.stringify(res.data.user))
-          localStorage.setItem('jwt', JSON.stringify(res.data.jwt))
+          cookies.set('signedInUser', res.data.user)
+          cookies.set('jwt', res.data.jwt)
           setRedirect(true);
         } else {
           console.log(res.data)
@@ -39,7 +43,8 @@ function SignIn() {
   }
 
   if (redirect) {
-    setProjectsToStorage()
+    setProjectsToStorage();
+    setBusinessesToStorage();
     return <Navigate to='/home' />
   }
 
@@ -77,6 +82,8 @@ function SignIn() {
         <span>
           <button type="submit">Sign In</button>
         </span>
+
+        <Link to='/signup'>Sign Up</Link>
       </form>
     </div>
   );

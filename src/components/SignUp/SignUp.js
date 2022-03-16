@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import Cookies from 'universal-cookie';
 
 function SignUp() {
@@ -22,8 +22,8 @@ function SignUp() {
       })
       .then((res) =>  {
         if (res.status === 200) {
-          localStorage.setItem('signedInUser', JSON.stringify(res.data.user))
-          localStorage.setItem('jwt', JSON.stringify(res.data.jwt))
+          cookies.set('signedInUser', res.data.user)
+          cookies.set('jwt', res.data.jwt)
           setRedirect(true);
           console.log(res.data)
         } else {
@@ -31,9 +31,6 @@ function SignUp() {
         }
       })
     ;
-
-    
-
   };
   
   if (redirect) {
@@ -103,6 +100,8 @@ function SignUp() {
         </span>
 
       </form>
+
+      <Link to='/signin'>Sign In</Link>
       </div>
   );
 }

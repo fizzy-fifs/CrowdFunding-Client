@@ -5,7 +5,7 @@ const fetchProjects = async() => {
   let cookies = new Cookies();
   var jwtToken = cookies.get("jwt")
 
-  const data = await axios.get('https://fundedlocal-server.herokuapp.com/api/v1.0/projects', {
+  const data = await axios.get('http://localhost:8080/api/v1.0/projects', {
     headers:{
       Authorization: "Bearer " + jwtToken
     }

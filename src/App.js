@@ -8,6 +8,7 @@ import Home from './pages/Home/Home';
 import setProjectsToStorage from './setToStorage/setProjectsToStorage';
 import setBusinessesToStorage from './setToStorage/setBusinessesToStorage';
 import updateStoredUserInfo from './setToStorage/updateStoredUserInfo';
+import ViewClickedProject from './components/ViewClickedProject/ViewClickedProject';
 
 setProjectsToStorage()
 setBusinessesToStorage()
@@ -24,6 +25,7 @@ function App() {
             <Route path="/signup" exact element={<SignUp />}/>
             <Route path="/signin" exact element={<SignIn />}/>
             <Route path="/home" exact element={<Home />}/>
+            <Route path="/projects/:id" exact element={<ViewClickedProject />}/>
 
           </Routes>
         </AnimatePresence>

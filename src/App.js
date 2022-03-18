@@ -9,12 +9,44 @@ import setProjectsToStorage from './setToStorage/setProjectsToStorage';
 import setBusinessesToStorage from './setToStorage/setBusinessesToStorage';
 import updateStoredUserInfo from './setToStorage/updateStoredUserInfo';
 import ViewClickedProject from './components/ViewClickedProject/ViewClickedProject';
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { useEffect } from 'react';
 
-setProjectsToStorage()
-setBusinessesToStorage()
-updateStoredUserInfo()
+
+
+
+
+// const stripePromise = loadStripe("pk_test_51KeDy4FkYRYTO3iFfudn4MjPO8k3oblu2cLUq0fTok8ZlLaOLMi7BNLndoErshtYIPKpT368914rXzi5fO7oTUk400q7JO4AWy");
 
 function App() {
+  // const [clientSecret, setClientSecret] = useState("");
+
+  // useEffect(() => {
+  //   // Create PaymentIntent as soon as the page loads
+  //   axios.post("http:localhost:8080/api/v1.0/payments/create-payment-intent", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setClientSecret(data.clientSecret));
+  // }, []);
+
+  // const appearance = {
+  //   theme: 'stripe',
+  // };
+  // const options = {
+  //   clientSecret,
+  //   appearance,
+  // };
+  
+  useEffect(() => {
+    setProjectsToStorage()
+    setBusinessesToStorage()
+    updateStoredUserInfo()
+  }, [])
+
   return (
     <div className="App">
       <Router>

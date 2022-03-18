@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import processPayments from '../../../apiCalls/processPayments'
+import Payments from '../../StripePayments/Payments'
 
 function ProjectsById(props) {
   const projects = JSON.parse(localStorage.getItem('projects')) || ''
@@ -13,6 +15,10 @@ function ProjectsById(props) {
           {/* <h5 className='eachProjectAmountRaised'>Raised: ${project.amountRaised}</h5> */}
           <h4 className='selectedProjectGoal'>Goal: ${filteredProject.goal}</h4>
           <p className='selectedProjectDescription'>{filteredProject.description}</p>
+          {useEffect(() => {
+            processPayments()
+          }, [])
+          }
 
         </div>
       ))}

@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import processPayments from '../../../apiCalls/processPayments'
 import Payments from '../../StripePayments/Payments'
+import { Navigate } from 'react-router-dom'
 
 function ProjectsById(props) {
   const projects = JSON.parse(localStorage.getItem('projects')) || ''
+  const [amount, setAmount] = useState('')
+  
+  const donate = (amount) => {
+    window.location.href=`http://localhost:8080/api/v1.0/payments/${amount}`
+  }
 
   return (
     <div>
@@ -15,11 +21,10 @@ function ProjectsById(props) {
           {/* <h5 className='eachProjectAmountRaised'>Raised: ${project.amountRaised}</h5> */}
           <h4 className='selectedProjectGoal'>Goal: ${filteredProject.goal}</h4>
           <p className='selectedProjectDescription'>{filteredProject.description}</p>
-          {useEffect(() => {
-            processPayments()
-          }, [])
-          }
-
+          <label>How much would you like to donate? <br/>
+            $<input type="number" id="amount" placeholder="$0.00" required onChange={(e) => setAmount(e.target.value)}/>
+          </label>
+          <button className='donate' style={{ cursor: 'pointer' }} onClick={() => donate(amount)} >Donate!</button>
         </div>
       ))}
     </div>

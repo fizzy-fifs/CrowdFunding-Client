@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import processPayments from '../../../apiCalls/processPayments'
-import Payments from '../../StripePayments/Payments'
-import { Navigate } from 'react-router-dom'
+import MapContainer from '../../Map/MapContainer'
+
 
 function ProjectsById(props) {
   const projects = JSON.parse(localStorage.getItem('projects')) || ''
@@ -21,6 +20,8 @@ function ProjectsById(props) {
           {/* <h5 className='eachProjectAmountRaised'>Raised: ${project.amountRaised}</h5> */}
           <h4 className='selectedProjectGoal'>Goal: ${filteredProject.goal}</h4>
           <p className='selectedProjectDescription'>{filteredProject.description}</p>
+          <MapContainer lat={filteredProject.latitude} lng={filteredProject.longitude}/>
+
           <label>How much would you like to donate? <br/>
             $<input type="number" id="amount" placeholder="$0.00" required onChange={(e) => setAmount(e.target.value)}/>
           </label>

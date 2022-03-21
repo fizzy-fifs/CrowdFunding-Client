@@ -7,13 +7,20 @@ import RegisterBusiness from "../RegisterBusiness/RegisterBusiness";
 function ListAProject() {
   const [modalState, setModalState] = useState(false);
   const [files, setFiles] = useState([]);
+  const [address, setAddress] = useState({});
 
   let cookies = new Cookies();
   let user = cookies.get("signedInUser");
   let myBusinesses = JSON.parse(localStorage.getItem("myBusinesses")) || "";
 
+  const x = () => {
+    
+  }
+
   const submit = async (event) => {
     event.preventDefault();
+
+    let addressJson = JSON.stringify(address);
 
     const formData = new FormData(event.target);
 
@@ -23,6 +30,7 @@ function ListAProject() {
     formData.set("goal", formData.get("goal"));
     formData.set("endDate", formData.get("endDate"));
     formData.set("businessId", myBusinesses.id);
+    formData.set('address', addressJson)
 
     for (let i = 0; i < files.length; i++) {
       formData.append("images[]", files[i]);
@@ -31,12 +39,12 @@ function ListAProject() {
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    await listAProjectApiCall(formData);
+    await listAProjectApiCall(formData, addressJson);
     window.location.reload();
   };
 
   {
-    if (myBusinesses == null) {
+    if (myBusinesses == "") {
       return (
         <h1 className="NoBusiness">
           Please Register A Business First <RegisterBusiness />
@@ -45,7 +53,10 @@ function ListAProject() {
     } else {
       return (
         <div className="ListAProject">
-          <button className="ListAProjectButton" onClick={() => setModalState(true)}>
+          <button
+            className="ListAProjectButton"
+            onClick={() => setModalState(true)}
+          >
             List A Project
           </button>
 
@@ -95,6 +106,7 @@ function ListAProject() {
                   type="text"
                   placeholder="How much would you like to raise"
                   name="goal"
+                  required
                 />
               </label>
               <br />
@@ -113,11 +125,9 @@ function ListAProject() {
               <label>
                 <select>
                   <option default>Link with relevant business</option>
-                 
                   <option value={myBusinesses.id} name="associatedBusiness">
-                      {myBusinesses.name}
+                    {myBusinesses.name}
                   </option>
-                 
                   {/* { myBusinesses.forEach((business) => {
                     return (
                       <option id={business.id} name="associatedBusiness">
@@ -135,9 +145,70 @@ function ListAProject() {
                   placeholder="Upload Multimedia"
                   name="images"
                   onChange={(event) => setFiles([...files, event.target.files])}
+                  multiple
                   required
                 />
               </label>
+              <br />
+              <div className="enterAddress">
+                <label>
+                  <input
+                    type="text"
+                    placeholder="Address Line1"
+                    name="line1"
+                    onChange={(event) =>
+                      setAddress({ ...address, line1: event.target.value })
+                    }
+                    required
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="Address Line2"
+                    name="line2"
+                    onChange={(event) =>
+                      setAddress({ ...address, line2: event.target.value })
+                    }
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    onChange={(event) =>
+                      setAddress({ ...address, city: event.target.value })
+                    }
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="State"
+                    name="state"
+                    onChange={(event) =>
+                      setAddress({ ...address, state: event.target.value })
+                    }
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="Country"
+                    name="country"
+                    onChange={(event) =>
+                      setAddress({ ...address, country: event.target.value })
+                    }
+                    required
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="Postal Code"
+                    name="postalCode"
+                    onChange={(event) =>
+                      setAddress({ ...address, postalCode: event.target.value })
+                    }
+                  />
+                </label>
+              </div>
               <br />
               <input type="submit" value="Submit" />
             </form>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.27",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.24.0",
     "@testing-library/jest-dom": "^5.16.2",
@@ -12,6 +13,7 @@
     "base-64": "^1.0.0",
     "bson-objectid": "^2.0.3",
     "framer-motion": "^6.2.8",
+    "google-maps-react": "^2.0.6",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -47,6 +49,8 @@
     ]
   },
   "devDependencies": {
+    "@iconify/icons-mdi": "^1.2.2",
+    "@iconify/react": "^3.2.0",
     "@types/js-base64": "^3.3.1"
   }
 }

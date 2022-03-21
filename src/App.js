@@ -16,9 +16,9 @@ function App() {
   let cookie = new Cookies();
   let user = cookie.get('signedInUser') || ''
 
-  if (user === '') {
-    return <Navigate to='/signin' />
-  }
+  // if (user === '') {
+  //  <SignIn />;
+  // }
 
   // useEffect(() => {
     setProjectsToStorage()

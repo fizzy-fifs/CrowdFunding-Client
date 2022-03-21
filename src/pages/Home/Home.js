@@ -3,8 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie'
 import ListAProject from '../../components/ListAProject/ListAProject'
 import Projects from '../../components/Projects/Projects';
-import RegisterBusiness from '../../components/RegisterBusiness/RegisterBusiness'
-import SignIn from '../../components/SignIn/SignIn';
+
 
 function Home() {
   let cookies = new Cookies();

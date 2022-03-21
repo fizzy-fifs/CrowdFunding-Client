@@ -14,7 +14,7 @@ function ProjectsById(props) {
     <div>
       {projects.filter(project => project.id === props.projectId).map(filteredProject => (
         <div>
-          <div className='selectedProjectImg'> <img src={filteredProject.images.map(image => <img src={image[0]} />)} /> </div>
+          <div className='selectedProjectImg'> {filteredProject.images.map(image => <img src={image} />)} </div>
           <h1 className='selectedProjectTitle'>{filteredProject.title}</h1>
           <h3 className='selectedProjectCategory'>{filteredProject.category}</h3>
           {/* <h5 className='eachProjectAmountRaised'>Raised: ${project.amountRaised}</h5> */}

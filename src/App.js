@@ -11,20 +11,18 @@ import updateStoredUserInfo from './setToStorage/updateStoredUserInfo';
 import ViewClickedProject from './components/ViewClickedProject/ViewClickedProject';
 import Cookies from 'universal-cookie';
 import PaymentsSuccess from './components/PaymentsSuccess/PaymentsSuccess';
+import setMyBusinessesToStorage from './setToStorage/setMyBusinessesToStorage';
 
 function App() {
   let cookie = new Cookies();
   let user = cookie.get('signedInUser') || ''
-
-  // if (user === '') {
-  //  <SignIn />;
-  // }
-
-  // useEffect(() => {
-    setProjectsToStorage()
-    setBusinessesToStorage()
-    updateStoredUserInfo()
-  // }, [])
+  
+  let myBusinesses = localStorage.getItem("myBusinesses");
+  
+  setProjectsToStorage()
+  setBusinessesToStorage()
+  updateStoredUserInfo()
+  if(!myBusinesses) { setMyBusinessesToStorage() }
 
   return (
     <div className="App">

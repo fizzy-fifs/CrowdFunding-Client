@@ -14,9 +14,8 @@ function Home() {
   } else {
     return (
       <div>
-        <Projects />
-        {/* <RegisterBusiness /> */}
         <ListAProject />
+        <Projects />
       </div>
     )
   }

@@ -13,9 +13,7 @@ function ListAProject() {
   let user = cookies.get("signedInUser");
   let myBusinesses = JSON.parse(localStorage.getItem("myBusinesses")) || "";
 
-  const x = () => {
-    
-  }
+  const x = () => {};
 
   const submit = async (event) => {
     event.preventDefault();
@@ -29,8 +27,8 @@ function ListAProject() {
     formData.set("description", formData.get("description"));
     formData.set("goal", formData.get("goal"));
     formData.set("endDate", formData.get("endDate"));
-    formData.set("businessId", myBusinesses.id);
-    formData.set('address', addressJson)
+    formData.set("businessId", formData.get("business"));
+    formData.set("address", addressJson);
 
     for (let i = 0; i < files.length; i++) {
       formData.append("images[]", files[i]);
@@ -123,18 +121,19 @@ function ListAProject() {
               </label>
 
               <label>
-                <select>
+                <select name="business">
                   <option default>Link with relevant business</option>
-                  <option value={myBusinesses.id} name="associatedBusiness">
-                    {myBusinesses.name}
-                  </option>
-                  {/* { myBusinesses.forEach((business) => {
+                  {myBusinesses.map((business) => {
                     return (
-                      <option id={business.id} name="associatedBusiness">
+                      <option
+                        value={business.id}
+                        key={business.id}
+                        name="associatedBusiness"
+                      >
                         {business.name}
                       </option>
                     );
-                  })}{" "} */}
+                  })}{" "}
                   required
                 </select>
               </label>

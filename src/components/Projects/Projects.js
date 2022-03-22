@@ -10,36 +10,26 @@ function Projects() {
       {projects.map((project) => (
         <Card
           className="mb-3"
-          style={{ cursor: "pointer", width: '36rem', height: '18rem' }}
+          style={{ cursor: "pointer", width: "36rem", height: "auto" }}
           onClick={() => (window.location.href = `/projects/${project.id}`)}
         >
-          {/* <div */}
-          {/* > */}
-          <Card.Img src={project.images[0]} className="card-img-top" style={{ height: '50%', objectFit: 'contain' }} />
-          {/* <div className="eachProjectImg"> */} {/* <img src= />{" "} */}
-          {/* </div>{" "} */}
+          <Card.Img
+            variant="top"
+            src={project.images[0]}
+            style={{
+              maxHeight: "15vw",
+              maxWidth: "100%",
+              objectFit: "cover",
+            }}
+          />
           <Card.Body>
-            {" "}
-            <Card.Title>
-              {" "}
-              {/* <h1 className="eachProjectTitle"> */}
-              {project.title}
-              {/* </h1> */}
-            </Card.Title>
-            <Card.Text>
-              {/* <h3 className="eachProjectCategory"> */}
+            <Card.Title>{project.title}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
               {project.category}
-              {/* </h3> */}
-              {/* <h5 className='eachProjectAmountRaised'>Raised: ${project.amountRaised}</h5> */}
-              {/* <h4 className="eachProjectGoal"> */}
-              Goal: ${project.goal}
-              {/* </h4> */}
-              {/* <p className="eachProjectDescription"> */}
-              {project.description}
-              {/* </p>{" "} */}
-            </Card.Text>
+            </Card.Subtitle>
+            <Card.Subtitle> Goal: ${project.goal}</Card.Subtitle>
+            <Card.Text>{project.description}</Card.Text>
           </Card.Body>
-          {/* </div> */}
         </Card>
       ))}
     </div>

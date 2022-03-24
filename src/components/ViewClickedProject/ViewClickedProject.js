@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import ProjectsById from '../Projects/ProjectsById/ProjectsById'
+import ProjectsById from '../ProjectsById/ProjectsById'
 
 function ViewClickedProject() {
   const { id } = useParams()

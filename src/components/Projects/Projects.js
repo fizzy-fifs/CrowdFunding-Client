@@ -1,20 +1,21 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
+import "./Projects.css";
 
 function Projects() {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
 
   return (
-    <div>
+    <div className="projects">
       {projects.map((project) => (
-        <Card
-          className="mb-3"
-          style={{ cursor: "pointer", width: "36rem", height: "auto" }}
+        <div
+          id="eachProjectCard"
+          // style={{ cursor: "pointer", width: "", height: "" }}
           onClick={() => (window.location.href = `/projects/${project.id}`)}
         >
-          <Card.Img
-            variant="top"
+          <img
+            id="eachProjectImg"
             src={project.images[0]}
             style={{
               maxHeight: "15vw",
@@ -22,15 +23,15 @@ function Projects() {
               objectFit: "cover",
             }}
           />
-          <Card.Body>
-            <Card.Title>{project.title}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              {project.category}
-            </Card.Subtitle>
-            <Card.Subtitle> Goal: ${project.goal}</Card.Subtitle>
-            <Card.Text>{project.description}</Card.Text>
-          </Card.Body>
-        </Card>
+          <div id="eachProjectContent">
+            <header className="eachProjectTitle">
+              <h4 className="eachProjectTitle"> {project.title} </h4>
+            </header>
+            <p className="eachProjectCategory">{project.category}</p>
+            <h3 className="eachProjectGoal">Goal: ${project.goal}</h3>
+            <p className="eachProjectDescription">{project.description}</p>
+          </div>
+        </div>
       ))}
     </div>
   );

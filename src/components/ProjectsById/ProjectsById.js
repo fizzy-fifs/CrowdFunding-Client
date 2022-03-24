@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MapContainer from '../../Map/MapContainer'
+import MapContainer from '../Map/MapContainer'
 
 
 function ProjectsById(props) {

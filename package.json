@@ -53,6 +53,9 @@
   "devDependencies": {
     "@iconify/icons-mdi": "^1.2.2",
     "@iconify/react": "^3.2.0",
-    "@types/js-base64": "^3.3.1"
+    "@types/js-base64": "^3.3.1",
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23"
   }
 }

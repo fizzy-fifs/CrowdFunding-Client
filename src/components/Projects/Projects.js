@@ -1,7 +1,5 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card } from "react-bootstrap";
-// import "./Projects.css";
 
 function Projects() {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";

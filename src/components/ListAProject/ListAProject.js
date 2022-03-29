@@ -103,7 +103,6 @@ function ListAProject() {
                   className="form-input h-[100px]"
                   name="description"
                   placeholder="Give a brief description of your project"
-                  // style={{ height: 150 }}
                   required
                 />
 

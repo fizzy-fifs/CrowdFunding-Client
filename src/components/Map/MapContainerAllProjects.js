@@ -1,23 +1,29 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
-export class MapContainer extends Component {
+export class MapContainerAllProjects extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <div className="h-[300px] w-[500px] m-auto mb-4 shadow-md">
+      <div
+        className="grid place-items-center h-screen"
+      >
         <Map
-          containerStyle={{ height: "300px", width: "500px" }}
+          containerStyle={{ maxHeight: "1000px", maxWidth: "2000px" }}
           google={this.props.google}
-          zoom={14}
-          initialCenter={{
-            lat: this.props.lat,
-            lng: this.props.lng,
-          }}
+          zoom={3}
         >
-          <Marker onClick={this.onMarkerClick} name={"Current location"} />
+          {this.props.latAndLng.map((eachMarker) => {
+            return (
+              <Marker
+                onClick={this.onMarkerClick}
+                name={"Current location"}
+                position={{ lat: eachMarker.lat, lng: eachMarker.lng }}
+              />
+            );
+          })}
 
           {/* <InfoWindow onClose={this.onInfoWindowClose}>
              <div>
@@ -32,4 +38,4 @@ export class MapContainer extends Component {
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyBKjQ7O0KZo8bUmUlRxN-w1maCu0KRdGZA",
-})(MapContainer);
+})(MapContainerAllProjects);

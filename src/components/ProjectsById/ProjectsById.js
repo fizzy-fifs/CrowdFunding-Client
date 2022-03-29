@@ -6,7 +6,7 @@ function ProjectsById(props) {
   const [amount, setAmount] = useState("");
 
   const donate = (amount) => {
-    window.location.href = `http://localhost:8080/api/v1.0/payments/${amount}`;
+    window.location.href = `https://fundedlocal-server.herokuapp.com/api/v1.0/payments/${amount}`;
   };
 
   return (

@@ -12,6 +12,9 @@ function ListAProject() {
   let cookies = new Cookies();
   let user = cookies.get("signedInUser");
   let myBusinesses = JSON.parse(localStorage.getItem("myBusinesses")) || "";
+  if (typeof myBusinesses === "object") myBusinesses = [myBusinesses];
+
+  console.log(myBusinesses);
 
   const x = () => {};
 
@@ -42,39 +45,48 @@ function ListAProject() {
   };
 
   {
-    if (myBusinesses == "") {
+    if (myBusinesses === "") {
       return (
-        <h1 className="NoBusiness">
-          Please Register A Business First <RegisterBusiness />
-        </h1>
+        <div className="flex flex-col text-left h-[500px] justify-center px-5 bg-gradient-to-br to-[#dff6f1] from-[#dff6f155]">
+          <div className="max-w-[1080px] mx-auto">
+            <h1 className="NoBusiness text-7xl max-w-[50%] mb-3">
+              Please Register A Business First
+            </h1>
+            <RegisterBusiness />
+          </div>
+        </div>
       );
     } else {
       return (
-        <div className="ListAProject">
-          <button
-            className="ListAProjectButton"
-            onClick={() => setModalState(true)}
-          >
-            List A Project
-          </button>
+        <div className="flex flex-col text-left h-[200px] justify-center px-5 bg-gradient-to-br to-[#dff6f1] from-[#dff6f155]">
+          <div className="max-w-[1080px] mx-auto">
+            <button
+              className="bg-green-500 font-semibold text-xl p-2 px-4 text-white rounded-full"
+              onClick={() => setModalState(true)}
+            >
+              List A Project
+            </button>
+          </div>
 
           <Modal
-            className="ListAProjectModal"
+            className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
             isOpen={modalState}
             onRequestClose={() => setModalState(false)}
           >
-            <form onSubmit={(event) => submit(event)}>
-              <label>
+            <div className="bg-white w-[80vw] flex flex-grow overflow-y-hidden h-[90vh] p-1 shadow-lg flex-col items-center rounded-md">
+              <form
+                className=" overflow-y-auto p-4"
+                onSubmit={(event) => submit(event)}
+              >
                 <input
+                  className="form-input"
                   type="text"
                   placeholder="Enter A Project Title"
                   name="projectTitle"
                   required
                 />
-              </label>
-              <br />
-              <label>
-                <select name="category">
+
+                <select name="category" className="form-input">
                   <option default>Please select a relevant category</option>
                   <option name="Arts">Arts</option>
                   <option name="ComicsAndIllustration">
@@ -86,31 +98,26 @@ function ListAProject() {
                   <option name="Games">Games</option>
                   <option name="Music">Music</option> required
                 </select>
-              </label>
-              <br />
-              <label>
+
                 <textarea
+                  className="form-input h-[100px]"
                   name="description"
                   placeholder="Give a brief description of your project"
-                  style={{ height: 150 }}
+                  // style={{ height: 150 }}
                   required
                 />
-              </label>
-              <br />
-              <label>
-                {" "}
-                $
+
                 <input
+                  className="form-input"
                   type="text"
                   placeholder="How much would you like to raise"
                   name="goal"
                   required
                 />
-              </label>
-              <br />
-              <label>
-                End Date<br></br>
+
+                <label> End Date</label>
                 <input
+                  className="form-input"
                   type="text"
                   placeholder="DD/MM/YYYY"
                   pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
@@ -118,10 +125,8 @@ function ListAProject() {
                   name="endDate"
                   required
                 />
-              </label>
 
-              <label>
-                <select name="business">
+                <select name="business" className="form-input">
                   <option default>Link with relevant business</option>
                   {myBusinesses.map((business) => {
                     return (
@@ -136,10 +141,9 @@ function ListAProject() {
                   })}{" "}
                   required
                 </select>
-              </label>
 
-              <label>
                 <input
+                  className="form-input"
                   type="file"
                   placeholder="Upload Multimedia"
                   name="images"
@@ -147,11 +151,13 @@ function ListAProject() {
                   multiple
                   required
                 />
-              </label>
-              <br />
-              <div className="enterAddress">
-                <label>
+
+                <br />
+                <h6>Address</h6>
+
+                <div className="enterAddress">
                   <input
+                    className="form-input"
                     type="text"
                     placeholder="Address Line1"
                     name="line1"
@@ -162,6 +168,7 @@ function ListAProject() {
                   />
 
                   <input
+                    className="form-input"
                     type="text"
                     placeholder="Address Line2"
                     name="line2"
@@ -171,6 +178,7 @@ function ListAProject() {
                   />
 
                   <input
+                    className="form-input"
                     type="text"
                     placeholder="City"
                     name="city"
@@ -180,6 +188,7 @@ function ListAProject() {
                   />
 
                   <input
+                    className="form-input"
                     type="text"
                     placeholder="State"
                     name="state"
@@ -189,6 +198,7 @@ function ListAProject() {
                   />
 
                   <input
+                    className="form-input"
                     type="text"
                     placeholder="Country"
                     name="country"
@@ -199,18 +209,26 @@ function ListAProject() {
                   />
 
                   <input
+                    className="form-input"
                     type="text"
                     placeholder="Postal Code"
                     name="postalCode"
                     onChange={(event) =>
-                      setAddress({ ...address, postalCode: event.target.value })
+                      setAddress({
+                        ...address,
+                        postalCode: event.target.value,
+                      })
                     }
                   />
-                </label>
-              </div>
-              <br />
-              <input type="submit" value="Submit" />
-            </form>
+                </div>
+
+                <input
+                  className="form-btn w-full"
+                  type="submit"
+                  value="Submit"
+                />
+              </form>
+            </div>
           </Modal>
         </div>
       );

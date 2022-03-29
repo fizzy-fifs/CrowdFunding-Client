@@ -40,45 +40,46 @@ function RegisterBusiness() {
           className="RegisterBusinessButton"
           onClick={() => setModalState(true)}
         >
-          <button>Register a Business</button>
+          <button className="bg-green-500 font-semibold text-xl p-2 px-4 text-white rounded-full">
+            Register a Business
+          </button>
         </div>
 
         <Modal
-          className="RegisterBusinessModal"
+          className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
           isOpen={modalState}
           onRequestClose={() => setModalState(false)}
         >
-          <form onSubmit={(event) => submit(event, user)}>
-            <label>
-              <input
-                type="text"
-                placeholder="What is the name of your business"
-                name="businessName"
-                required
-              />
-            </label>
-            <br />
-            <label>
-              <textarea
-                name="description"
-                placeholder="Describe the nature of your business"
-                style={{ height: 150 }}
-                required
-              />
-            </label>
-            <br />
+          <form
+            onSubmit={(event) => submit(event, user)}
+            className="bg-white w-[400px] p-4 shadow-lg flex flex-col items-center rounded-md"
+          >
+            <input
+              className="form-input"
+              type="text"
+              placeholder="What is the name of your business"
+              name="businessName"
+              required
+            />
 
-            <label>
-              <input
-                type="file"
-                multiple
-                placeholder="Upload Multimedia"
-                name="images"
-                onChange={(event) => setFiles([...files, event.target.files])}
-              />
-            </label>
+            <textarea
+              className="form-input"
+              name="description"
+              placeholder="Describe the nature of your business"
+              style={{ height: 150 }}
+              required
+            />
+
+            <input
+              className="form-input"
+              type="file"
+              multiple
+              placeholder="Upload Multimedia"
+              name="images"
+              onChange={(event) => setFiles([...files, event.target.files])}
+            />
             <br />
-            <input type="submit" value="Submit" />
+            <input className="form-btn" type="submit" value="Submit" />
           </form>
         </Modal>
       </div>

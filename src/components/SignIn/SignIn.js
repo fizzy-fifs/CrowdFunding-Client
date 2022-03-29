@@ -6,59 +6,66 @@ import setProjectsToStorage from "../../setToStorage/setProjectsToStorage";
 import setBusinessesToStorage from "../../setToStorage/setBusinessesToStorage";
 
 function SignIn() {
-  const [redirect, setRedirect] = useState(false)
+  const [redirect, setRedirect] = useState(false);
   const [data, setData] = useState({
     email: "",
-    password: ""
-  })
+    password: "",
+  });
 
   let cookies = new Cookies();
 
   const handleChange = (event) => {
-    const newData = {...data}
-    newData[event.target.id] = event.target.value
-    setData(newData)
-  }
+    const newData = { ...data };
+    newData[event.target.id] = event.target.value;
+    setData(newData);
+  };
 
   const submit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     // const formData = new FormData(event.target)
 
     // formData.set('email', formData.get(`${event.target.email.value}`));
     // formData.set('password', formData.get(`${event.target.password.value}`));
 
-    console.log(data)
-    
+    console.log(data);
+
     await axios
-      .post('https://fundedlocal-server.herokuapp.com/api/v1.0/users/login', data,  )
-      .then((res) =>  {
+      .post(
+        "https://fundedlocal-server.herokuapp.com/api/v1.0/users/login",
+        data
+      )
+      .then((res) => {
         if (res.status === 200) {
-          cookies.set('signedInUser', res.data.user)
-          cookies.set('jwt', res.data.jwt)
+          cookies.set("signedInUser", res.data.user);
+          cookies.set("jwt", res.data.jwt);
           setRedirect(true);
         } else {
-          console.log(res.data)
+          console.log(res.data);
         }
-      })
-  }
+      });
+  };
 
   if (redirect) {
     setProjectsToStorage();
     setBusinessesToStorage();
-    return <Navigate to='/home' />
+    return <Navigate to="/home" />;
   }
 
   return (
-    <div className="Signin">
-      <form onSubmit={submit}>
+    <div className="Signup h-[100vh] w-full flex flex-col justify-center items-center bg-[#EFF5F4]">
+      <form
+        className="bg-white p-4 w-[400px] rounded-md shadow-md flex flex-col"
+        onSubmit={submit}
+      >
         <header>
-          <h1>Welcome</h1>
-          <h2>Sign In</h2>
+          <h3>SIGN IN</h3>
+          <br />
         </header>
 
         <span>
           <input
-            type="email;"
+            className="form-input"
+            type="email"
             placeholder="Email"
             id="email"
             value={data.email}
@@ -68,8 +75,8 @@ function SignIn() {
         </span>
 
         <span>
-          <br></br>
           <input
+            className="form-input"
             type="password"
             placeholder="Password"
             id="password"
@@ -80,11 +87,21 @@ function SignIn() {
         </span>
 
         <span>
-          <button type="submit">Sign In</button>
+          <br />
+          <button className="form-btn" type="submit">
+            Sign In
+          </button>
         </span>
-
-        <Link to='/signup'>Sign Up</Link>
       </form>
+      <div className="p-3 font-medium">
+        Create New Account
+        <Link
+          className="text-green-500 hover:text-green-400 transition-all no-underline p-2 font-medium"
+          to="/signup"
+        >
+          SIGN UP
+        </Link>
+      </div>
     </div>
   );
 }

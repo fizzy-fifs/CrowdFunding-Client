@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 function LandingPage() {
   return (
-    <div className="h-[100vh] flex justify-center items-center">
+    <div className="h-full flex flex-1 justify-center items-center">
       {/* <div className="logo">
         <img src={logo}></img>
       </div> */}

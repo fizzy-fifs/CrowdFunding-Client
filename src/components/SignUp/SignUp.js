@@ -40,7 +40,7 @@ function SignUp() {
   }
 
   return (
-    <div className="Signup h-[100vh] w-full flex flex-col justify-center items-center bg-[#EFF5F4]">
+    <div className="Signup h-full flex-1 w-full flex flex-col justify-center items-center bg-[#EFF5F4]">
       <form
         onSubmit={submit}
         className="bg-white p-4 w-[400px] rounded-md shadow-md"

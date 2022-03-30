@@ -8,10 +8,7 @@ function MapWithAllProjects() {
   const loadLatAndLng = () => {
     projects.map(project => {latAndLng.push({ lat: project.latitude, lng: project.longitude })})
   }
-  
   loadLatAndLng();
-  console.log(latAndLng.map(eachLatAndLng => {return eachLatAndLng.lat}))
-  console.log(latAndLng.map(eachLatAndLng => {return eachLatAndLng.lng}))
 
   return (
     <div>

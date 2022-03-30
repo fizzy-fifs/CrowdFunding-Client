@@ -23,10 +23,6 @@ function RegisterBusiness() {
     for (let i = 0; i < files.length; i++) {
       formData.append(`images[${i}]`, files[i]);
     }
-
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
     await registerABusinessApiCall(formData);
     window.location.reload();
   };

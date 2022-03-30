@@ -14,8 +14,6 @@ function ListAProject() {
   let myBusinesses = JSON.parse(localStorage.getItem("myBusinesses")) || "";
   if (typeof myBusinesses === "object") myBusinesses = [myBusinesses];
 
-  console.log(myBusinesses);
-
   const x = () => {};
 
   const submit = async (event) => {
@@ -35,10 +33,6 @@ function ListAProject() {
 
     for (let i = 0; i < files.length; i++) {
       formData.append("images[]", files[i]);
-    }
-
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
     }
     await listAProjectApiCall(formData, addressJson);
     window.location.reload();
@@ -127,7 +121,7 @@ function ListAProject() {
 
                 <select name="business" className="form-input">
                   <option default>Link with relevant business</option>
-                  {myBusinesses.map((business) => {
+                  {myBusinesses.map(businesses => businesses.map((business) => {
                     return (
                       <option
                         value={business.id}
@@ -137,7 +131,7 @@ function ListAProject() {
                         {business.name}
                       </option>
                     );
-                  })}{" "}
+                  }))}{" "}
                   required
                 </select>
 

@@ -22,12 +22,6 @@ function SignIn() {
 
   const submit = async (event) => {
     event.preventDefault();
-    // const formData = new FormData(event.target)
-
-    // formData.set('email', formData.get(`${event.target.email.value}`));
-    // formData.set('password', formData.get(`${event.target.password.value}`));
-
-    console.log(data);
 
     await axios
       .post(

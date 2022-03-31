@@ -52,15 +52,11 @@ function ListAProject() {
       );
     } else {
       return (
-        <div className="flex flex-col text-left h-[200px] justify-center px-5 bg-gradient-to-br to-[#dff6f1] from-[#dff6f155]">
-          <div className="max-w-[1080px] mx-auto">
-            <button
-              className="bg-green-500 font-semibold text-xl p-2 px-4 text-white rounded-full"
-              onClick={() => setModalState(true)}
-            >
-              List A Project
-            </button>
-          </div>
+        <div
+          onClick={() => setModalState(true)}
+          className="w-fit px-3 cursor-pointer border-b-0 border-[#fff0] transition-all hover:border-b-2 hover:border-green-500 h-full flex flex-col justify-center"
+        >
+          <div className="font-medium text-gray-700">List A Project</div>
 
           <Modal
             className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
@@ -121,17 +117,19 @@ function ListAProject() {
 
                 <select name="business" className="form-input">
                   <option default>Link with relevant business</option>
-                  {myBusinesses.map(businesses => businesses.map((business) => {
-                    return (
-                      <option
-                        value={business.id}
-                        key={business.id}
-                        name="associatedBusiness"
-                      >
-                        {business.name}
-                      </option>
-                    );
-                  }))}{" "}
+                  {myBusinesses.map((businesses) =>
+                    businesses.map((business) => {
+                      return (
+                        <option
+                          value={business.id}
+                          key={business.id}
+                          name="associatedBusiness"
+                        >
+                          {business.name}
+                        </option>
+                      );
+                    })
+                  )}{" "}
                   required
                 </select>
 

@@ -5,10 +5,11 @@ function ProjectsById(props) {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
   const [amount, setAmount] = useState("");
 
-  const donate = (amount) => {
-    window.location.href = `https://fundedlocal-server.herokuapp.com/api/v1.0/payments/${amount}`;
+  const donate = (projectId, amount) => {
+    window.location.href = `http://localhost:8080/api/v1.0/payments/${projectId}&${amount}`;
   };
 
+ 
   return (
     <div className="max-w-[1200px] m-auto bg-green-50">
       {projects
@@ -17,12 +18,12 @@ function ProjectsById(props) {
           <div>
             <div
               id="default-carousel"
-              class="relative"
+              className="relative"
               data-carousel={
                 filteredProject.images.length === 1 ? "static" : "slide"
               }
             >
-              <div class="overflow-hidden relative h-[70vh]">
+              <div className="overflow-hidden relative h-[70vh]">
                 {[
                   ...filteredProject.images,
                   ...filteredProject.images,
@@ -69,21 +70,23 @@ function ProjectsById(props) {
             <div className="p-4 bg-white w-full">
               <div>How much would you like to donate?</div>
               <div className="flex flex-row justify-center mt-3">
-                <input
-                  type="number"
-                  id="amount"
-                  placeholder="$0.00"
-                  required
-                  className="form-input w-[200px]"
-                  onChange={(e) => setAmount(e.target.value)}
-                />
+                  <input
+                    type="number"
+                    id="amount"
+                    pattern="^[0-9]*\.[0-9]{2}$"
+                    title="0.00"
+                    placeholder="$0.00"
+                    required
+                    className="form-input w-[200px]"
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
 
-                <button
-                  className="form-btn w-[100px] ml-5 h-fit"
-                  onClick={() => donate(amount)}
-                >
-                  Donate!
-                </button>
+                  <button
+                    className="form-btn w-[100px] ml-5 h-fit"
+                    onClick={() => donate(filteredProject.id, amount)}
+                  >
+                    Donate!
+                  </button>
               </div>
             </div>
           </div>

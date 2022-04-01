@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import setProjectsToStorage from "../../setToStorage/setProjectsToStorage";
 import setBusinessesToStorage from "../../setToStorage/setBusinessesToStorage";
+import setMyBusinessesToStorage from "../../setToStorage/setMyBusinessesToStorage";
 
 function SignIn() {
   const [redirect, setRedirect] = useState(false);
@@ -42,6 +43,7 @@ function SignIn() {
   if (redirect) {
     setProjectsToStorage();
     setBusinessesToStorage();
+    setMyBusinessesToStorage();
     return <Navigate to="/home" />;
   }
 

@@ -6,7 +6,7 @@ const listAProjectApiCall = async(formData) => {
   var jwtToken = cookies.get("jwt")
 
   await axios
-  .post('https://fundedlocal-server.herokuapp.com/api/v1.0/projects/newproject', formData, {
+  .post('http://localhost:8080/api/v1.0/projects/newproject', formData, {
     headers: { 
       'content-type': 'multipart/form-data',
       Authorization: "Bearer " + jwtToken

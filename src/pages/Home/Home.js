@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import AppBar from "../../components/Appbar/Appbar";
 import ListAProject from "../../components/ListAProject/ListAProject";
 import Projects from "../../components/Projects/Projects";
 import SignOut from "../../components/SignOut/SignOut";
@@ -18,7 +19,7 @@ function Home() {
   } else {
     return (
       <div>
-        <div className="max-w-[1080px] mx-auto">
+        {/* <div className="max-w-[1080px] mx-auto">
           <button
             className="bg-green-500 font-semibold text-xl p-2 px-4 text-white rounded-full"
             onClick={viewProjectsMap}
@@ -27,7 +28,8 @@ function Home() {
           </button>
         </div>
         <ListAProject />
-        <SignOut />
+        <SignOut /> */}
+        <AppBar />
         <Projects />
       </div>
     );

@@ -70,23 +70,21 @@ function ProjectsById(props) {
             <div className="p-4 bg-white w-full">
               <div>How much would you like to donate?</div>
               <div className="flex flex-row justify-center mt-3">
-                  <input
-                    type="number"
-                    id="amount"
-                    pattern="^[0-9]*\.[0-9]{2}$"
-                    title="0.00"
-                    placeholder="$0.00"
-                    required
-                    className="form-input w-[200px]"
-                    onChange={(e) => setAmount(e.target.value)}
-                  />
+                <input
+                  type="number"
+                  id="amount"
+                  placeholder="$0.00"
+                  required
+                  className="form-input w-[200px]"
+                  onChange={(e) => setAmount(e.target.value)}
+                />
 
-                  <button
-                    className="form-btn w-[100px] ml-5 h-fit"
-                    onClick={() => donate(filteredProject.id, amount)}
-                  >
-                    Donate!
-                  </button>
+                <button
+                  className="form-btn w-[100px] ml-5 h-fit"
+                  onClick={() => donate(amount)}
+                >
+                  Donate!
+                </button>
               </div>
             </div>
           </div>

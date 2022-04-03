@@ -11,6 +11,10 @@ const AppBar = () => {
     window.location.href = "/projects-map";
   };
 
+  const viewRewards = () => {
+    window.location.href = "/my-rewards"
+  }
+
   let cookie = new Cookies();
 
   const logOut = () => {
@@ -37,6 +41,10 @@ const AppBar = () => {
               <NavLink
                 onClick={viewProjectsMap}
                 title="View All Projects On A Map"
+              />
+              <NavLink
+                onClick={viewRewards}
+                title="Rewards"
               />
             </div>
           </div>

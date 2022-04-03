@@ -13,6 +13,7 @@ import Cookies from 'universal-cookie';
 import PaymentsSuccess from './components/PaymentsSuccess/PaymentsSuccess';
 import setMyBusinessesToStorage from './setToStorage/setMyBusinessesToStorage';
 import MapWithAllProjects from './components/MapWithAllProjects';
+import Rewards from './components/Rewards/Rewards';
 
 function App() {
   let cookie = new Cookies();
@@ -38,6 +39,7 @@ function App() {
             <Route path="/projects/:id" exact element={<ViewClickedProject />}/>
             <Route path="/payments-success" exact element={<PaymentsSuccess />}/>
             <Route path="/projects-map" exact element={<MapWithAllProjects />} />
+            <Route path="/my-rewards" exact element={<Rewards />} />
 
           </Routes>
         </AnimatePresence>

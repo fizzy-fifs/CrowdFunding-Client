@@ -1,5 +1,6 @@
 import Cookies from "universal-cookie"
 import fetchUserById from '../apiCalls/fetchUserById'
+import SignIn from '../components/SignIn/SignIn'
 
 const updateStoredUserInfo = async() => {
   const cookie = new Cookies();
@@ -9,6 +10,7 @@ const updateStoredUserInfo = async() => {
     const userInfo = await fetchUserById(user.id);
     cookie.set('signedInUser', userInfo);
   }
+  <SignIn/>
 }
 
 export default updateStoredUserInfo

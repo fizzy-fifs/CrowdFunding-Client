@@ -13,8 +13,12 @@ const AppBar = () => {
   let user = cookie.get('signedInUser') || '';
 
   const viewProjectsMap = () => {
-    window.location.href = "/projects-map";
+    return window.location.href = "/projects-map";
   };
+
+  const goHome = () => {
+    window.location.href="/home";
+  }
 
   const viewRewards = () => {
     if (user === '') {
@@ -47,15 +51,12 @@ const AppBar = () => {
       <div ref={ref} className="h-20 bg-white fixed z-50 w-full shadow-md">
         <div className="max-w-[1080px] p-2 flex flex-row justify-between items-center h-full m-auto">
           <div className="flex flex-row items-center h-full">
-            <div className="h-full cursor-pointer">
-              <img src={Logo} alt="logo" className="h-full" />
+            <div className="h-full cursor-pointer" onClick={goHome} >
+              <img src={Logo} alt="logo" className="h-full"  />
             </div>
 
             <div className="flex flex-row h-full ">
-              <NavLink
-                onClick={listAProject}
-                title="List A Project"
-              />
+              <ListAProject />
               <NavLink
                 onClick={viewProjectsMap}
                 title="View All Projects On A Map"

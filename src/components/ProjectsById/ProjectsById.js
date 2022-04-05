@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "universal-cookie";
 import MapContainer from "../Map/MapContainer";
 
 function ProjectsById(props) {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
+  const cookie = new Cookies()
+  const user = cookie.get('signedInUser') || ''
   const [amount, setAmount] = useState("");
 
-  const donate = (projectId, amount) => {
-    window.location.href = `http://localhost:8080/api/v1.0/payments/${projectId}&${amount}`;
+  const donate = (projectId, amount, userId) => {
+    if (user === '') {
+      return window.location.href = "/signin"
+    }
+    window.location.href = `http://localhost:8080/api/v1.0/payments/${projectId}&${amount}&${userId}`;
   };
 
  
@@ -81,7 +87,7 @@ function ProjectsById(props) {
 
                 <button
                   className="form-btn w-[100px] ml-5 h-fit"
-                  onClick={() => donate(amount)}
+                  onClick={() => donate(filteredProject.id, amount, user.id)}
                 >
                   Donate!
                 </button>

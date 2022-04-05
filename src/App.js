@@ -16,6 +16,7 @@ import MapWithAllProjects from './components/MapWithAllProjects';
 import Rewards from './components/Rewards/Rewards';
 import RegisterBusiness from './components/RegisterBusiness/RegisterBusiness';
 import ListAProject from './components/ListAProject/ListAProject';
+import AppBar from './components/Appbar/Appbar';
 
 function App() {
   let cookie = new Cookies();
@@ -26,24 +27,25 @@ function App() {
   setProjectsToStorage()
   setBusinessesToStorage()
   updateStoredUserInfo()
-  if(!myBusinesses) { setMyBusinessesToStorage() }
+  setMyBusinessesToStorage()
 
   return (
     <div className="App">
       <Router>
         <AnimatePresence exitBeforeEnter>
+          <AppBar />
           <Routes>
-            
-            <Route path="/" exact element={<LandingPage />}/>
-            <Route path="/signup" exact element={<SignUp />}/>
-            <Route path="/signin" exact element={<SignIn />}/>
-            <Route path="/home" exact element={<Home />}/>
-            <Route path="/projects/:id" exact element={<ViewClickedProject />}/>
-            <Route path="/payments-success" exact element={<PaymentsSuccess />}/>
-            <Route path="/projects-map" exact element={<MapWithAllProjects />} />
-            <Route path="/my-rewards" exact element={<Rewards />} />
-            <Route path="/register-a-business" exact element={<RegisterBusiness />} />
-            <Route path="/list-a-project" exact element={<ListAProject />} />
+    
+              <Route path="/" exact element={<LandingPage />}/>
+              <Route path="/signup" exact element={<SignUp />}/>
+              <Route path="/signin" exact element={<SignIn />}/>
+              <Route path="/home" exact element={<Home />}/>
+              <Route path="/projects/:id" exact element={<ViewClickedProject />}/>
+              <Route path="/payments-success" exact element={<PaymentsSuccess />}/>
+              <Route path="/projects-map" exact element={<MapWithAllProjects />} />
+              <Route path="/my-rewards" exact element={<Rewards />} />
+              <Route path="/register-a-business" exact element={<RegisterBusiness />} />
+              <Route path="/list-a-project" exact element={<ListAProject />} />
 
           </Routes>
         </AnimatePresence>

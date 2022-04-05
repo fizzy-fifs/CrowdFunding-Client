@@ -9,7 +9,6 @@ import SignOut from "../../components/SignOut/SignOut";
 function Home() {
   return (
     <div>
-      <AppBar />
       <Projects />
     </div>
   );

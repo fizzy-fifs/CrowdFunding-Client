@@ -11,10 +11,6 @@ function RegisterBusiness() {
   let cookies = new Cookies();
   let user = cookies.get("signedInUser") || "";
 
-  const signIn = () => {
-    return window.location.href = "/signin"
-  }
-
   const submit = async (event, user) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -28,11 +24,11 @@ function RegisterBusiness() {
       formData.append(`images[${i}]`, files[i]);
     }
     await registerABusinessApiCall(formData);
-    window.location.reload();
+    window.location.href = "/home";
   };
 
   if (user === "") {
-    return <NavLink onClick={signIn} title="Sign In" /> ;
+    return  window.location.href = "/signin";
   } else {
     return (
       <div className="RegisterBusinessContainer">
@@ -77,6 +73,7 @@ function RegisterBusiness() {
               placeholder="Upload Multimedia"
               name="images"
               onChange={(event) => setFiles([...files, event.target.files])}
+              required
             />
             <br />
             <input className="form-btn" type="submit" value="Submit" />

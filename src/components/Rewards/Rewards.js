@@ -9,7 +9,7 @@ function Rewards() {
   let rewards = user.earnedRewards
 
   if (!rewards) {
-    return (<div><header>You currently do not have any rewards. Support your favorite projects today to start earning rewards </header></div>)
+    return (<div className='text-7xl max-w-[50%] mb-3 items-center'><h1>You currently do not have any rewards. Support your favorite projects today to start earning rewards </h1></div>)
   }
   return (
     <div>

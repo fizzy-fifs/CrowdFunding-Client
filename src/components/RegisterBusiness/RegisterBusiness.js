@@ -3,13 +3,17 @@ import Modal from "react-modal/lib/components/Modal";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import registerABusinessApiCall from "../../apiCalls/registerABusinessApiCall";
-import SignIn from "../SignIn/SignIn";
+import { NavLink } from "react-router-dom";
 
 function RegisterBusiness() {
   const [modalState, setModalState] = useState(false);
   const [files, setFiles] = useState([]);
   let cookies = new Cookies();
   let user = cookies.get("signedInUser") || "";
+
+  const signIn = () => {
+    return window.location.href = "/signin"
+  }
 
   const submit = async (event, user) => {
     event.preventDefault();
@@ -28,7 +32,7 @@ function RegisterBusiness() {
   };
 
   if (user === "") {
-    return <SignIn />;
+    return <NavLink onClick={signIn} title="Sign In" /> ;
   } else {
     return (
       <div className="RegisterBusinessContainer">

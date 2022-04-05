@@ -2,7 +2,8 @@ import { React, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
 import Cookies from "universal-cookie";
 import listAProjectApiCall from "../../apiCalls/listAProjectApiCall";
-import RegisterBusiness from "../RegisterBusiness/RegisterBusiness";
+import { NavLink } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function ListAProject() {
   const [modalState, setModalState] = useState(false);
@@ -10,11 +11,13 @@ function ListAProject() {
   const [address, setAddress] = useState({});
 
   let cookies = new Cookies();
-  let user = cookies.get("signedInUser");
+  let user = cookies.get("signedInUser") || "";
   let myBusinesses = JSON.parse(localStorage.getItem("myBusinesses")) || "";
   if (typeof myBusinesses === "object") myBusinesses = [myBusinesses];
 
-  const x = () => {};
+  const registerABusiness = () => {
+    return window.location.href = "/register-a-business";
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -43,10 +46,10 @@ function ListAProject() {
       return (
         <div className="flex flex-col text-left h-[500px] justify-center px-5 bg-gradient-to-br to-[#dff6f1] from-[#dff6f155]">
           <div className="max-w-[1080px] mx-auto">
-            <h1 className="NoBusiness text-7xl max-w-[50%] mb-3">
-              Please Register A Business First
+            <h1 className="NoBusiness text-7xl max-w-[50%] mb-3 cursor-pointer" onClick={registerABusiness}>
+              Please Register A Business First"
             </h1>
-            <RegisterBusiness />
+            
           </div>
         </div>
       );

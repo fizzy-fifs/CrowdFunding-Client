@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import ListAProject from "../ListAProject/ListAProject";
 import Logo from "./logo_transparent.png";
@@ -7,15 +8,29 @@ const AppBar = () => {
   const [height, setHeight] = useState(0);
   const ref = useRef(null);
 
+  let cookie = new Cookies();
+
+  let user = cookie.get('signedInUser') || '';
+
   const viewProjectsMap = () => {
     window.location.href = "/projects-map";
   };
 
   const viewRewards = () => {
+    if (user === '') {
+      return window.location.href='/signin'
+    }
     window.location.href = "/my-rewards"
   }
 
-  let cookie = new Cookies();
+  const listAProject = () => {
+    if (user === "") { return window.location.href = "/signin" }
+    return window.location.href = "/list-a-project";
+  }
+
+  const signIn = () => {
+    window.location.href = "/signin"
+  }
 
   const logOut = () => {
     cookie.remove("signedInUser");
@@ -37,7 +52,10 @@ const AppBar = () => {
             </div>
 
             <div className="flex flex-row h-full ">
-              <ListAProject />
+              <NavLink
+                onClick={listAProject}
+                title="List A Project"
+              />
               <NavLink
                 onClick={viewProjectsMap}
                 title="View All Projects On A Map"
@@ -49,7 +67,11 @@ const AppBar = () => {
             </div>
           </div>
           <div className="h-full">
-            <NavLink onClick={logOut} title="Sign Out" />
+            { user === '' &&
+              <NavLink onClick={signIn} title="Sign In" />}
+              {user !== '' &&
+              <NavLink onClick={logOut} title="Sign Out" />
+            }
           </div>
         </div>
       </div>

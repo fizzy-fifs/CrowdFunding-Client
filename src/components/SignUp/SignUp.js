@@ -90,21 +90,6 @@ function SignUp() {
         </span>
 
         <span>
-          <label htmlFor="dateOfBirth" className="text-left w-full">
-            Date Of Birth
-          </label>
-          <input
-            type="text"
-            className="form-input"
-            placeholder="DD/MM/YYYY"
-            pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
-            title="DD/MM/YYYY"
-            onChange={(e) => setUser({ ...user, dob: e.target.value })}
-            required
-          />
-        </span>
-
-        <span>
           <br></br>
           <br />
           <button className="form-btn" type="submit">

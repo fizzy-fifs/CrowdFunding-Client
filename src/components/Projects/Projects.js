@@ -1,8 +1,19 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Cookies from "universal-cookie";
+import { Navigate } from "react-router-dom";
 
 function Projects() {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
+  const cookie = new Cookies();
+  const user = cookie.get('signedInUser') || "";
+
+  const viewEachProduct = (projectId) => {
+    if (user === "") {
+      return window.location.href = "/signin";
+    } 
+    return window.location.href = `/projects/${projectId}`
+  }
 
   return (
     <div className="projects grid grid4:grid-cols-4 grid3:grid-cols-3 grid2:grid-cols-2 grid1:grid-cols-1 bg-[#EFF5F4] p-4">
@@ -25,9 +36,7 @@ function Projects() {
               <header>
                 <h5
                   className="cursor-pointer font-bold text-left line-clamp-2"
-                  onClick={() =>
-                    (window.location.href = `/projects/${project.id}`)
-                  }
+                  onClick={() => viewEachProduct(project.id)}
                 >
                   {project.title}
                 </h5>

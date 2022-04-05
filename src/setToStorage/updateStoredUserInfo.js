@@ -10,7 +10,6 @@ const updateStoredUserInfo = async() => {
     const userInfo = await fetchUserById(user.id);
     cookie.set('signedInUser', userInfo);
   }
-  <SignIn/>
 }
 
 export default updateStoredUserInfo

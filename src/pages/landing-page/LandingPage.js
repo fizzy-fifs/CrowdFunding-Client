@@ -34,6 +34,10 @@ function LandingPage() {
             Sign Up
           </button>
         </Link>
+         <br /><br />
+        <Link to="/home">
+          <h6> Explore FundedLocal</h6>
+        </Link>
       </div>
     </div>
   );

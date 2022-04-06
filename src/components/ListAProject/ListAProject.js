@@ -20,6 +20,10 @@ function ListAProject() {
     return (window.location.href = "/register-a-business");
   };
 
+  const handleModalClose = () => {
+    setNoBusinessModal(false)
+  }
+
   const submit = async (event) => {
     event.preventDefault();
 
@@ -51,15 +55,15 @@ function ListAProject() {
             className="w-fit px-3 cursor-pointer border-b-0 border-[#fff0] transition-all hover:border-b-2 hover:border-green-500 h-full flex flex-col justify-center"
           >
             <div className="font-medium text-gray-700">List A Project</div>
+            <div className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" >
+
             <Modal
               className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
               isOpen={noBusinessModal}
               style
+              onClose={() => handleModalClose}
               onRequestClose={() => setNoBusinessModal(false)}
             >
-               <header>
-            <FaTimes style={{color: 'red', cursor: 'pointer', display: 'inline'}} onClick={() => setNoBusinessModal(false)}  />
-          </header>
               <div className="flex flex-col text-left h-[500px] justify-center px-5 bg-gradient-to-br to-[#dff6f1] from-[#dff6f155]">
                 <div className="max-w-[1080px] mx-auto">
                   <h1
@@ -71,6 +75,7 @@ function ListAProject() {
                 </div>
               </div>
             </Modal>
+            </div>
           </div>
         );
     }

@@ -1,39 +1,41 @@
 import React, { useState } from "react";
-import Scroll from "./Scroll";
-import SearchList from "./SearchList";
+import "./Search.css";
 
 function Search({ details }) {
-  const [searchField, setSearchField] = useState("");
-  
+  const [filteredDetails, setFilteredDetails] = useState([]);
 
-  const filteredSubjects = details.filter((subject) => { 
-    return (
-      subject.title.toLowerCase().includes(searchField.toLowerCase()) ||
-      subject.category.toLowerCase().includes(searchField.toLowerCase())
-    );
-  });
-
-  const handleChange = (e) => {
-    setSearchField(e.target.value);
-    return (
-      <Scroll className="w-fit px-3 cursor-pointer border-b-0 border-[#fff0] transition-all hover:border-b-2 hover:border-green-500 h-full flex flex-col justify-center">
-        <SearchList filteredSubjects={filteredSubjects} />
-      </Scroll>
-    );
+  const goToProject = (id) => {
+    window.location.href = `/projects/${id}`;
   };
 
-  const searchList = () => {
-    
-  };
+  const handleFilter = (event) => {
+    const wordEntry = event.target.value
+    const newFilter = details.filter((detail) => {
+      return detail.title.toLowerCase().includes(wordEntry.toLowerCase());
+    });
+    return wordEntry === '' ? setFilteredDetails([]) : setFilteredDetails(newFilter);
+  }
   return (
     <section className="garamond">
       <div className="w-fit px-1 cursor-pointer border-b-0 border-[#fff0] transition-all hover:border-b-2 h-full flex flex-col justify-center">
-        <input
-          className="b--none bg-lightest-blue ma3"
-          type="search"
-          placeholder="Search Projects"
-          onChange={handleChange}
-        />
+        <div className="searchInputs">
+          <input
+            className="b--none bg-lightest-blue ma3"
+            type="search"
+            placeholder="Search Projects"
+            onChange={(event) => handleFilter(event)}
+          />
+        </div>
+        {filteredDetails.length != 0 && (
+          <div className="dataResults">
+            {filteredDetails.slice(0, 10).map((value, key) => (
+              <div className="dataItem" onClick={() => goToProject(value.id)}>
+                {" "}
+                <p>{value.title} </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

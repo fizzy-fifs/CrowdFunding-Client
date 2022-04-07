@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
 import { Navigate } from "react-router-dom";
+import Search from "../Search/Search";
 
 function Projects() {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
@@ -15,6 +16,7 @@ function Projects() {
     return window.location.href = `/projects/${projectId}`
   }
 
+  let allProjects = JSON.parse(localStorage.getItem("projects")) || "";
   return (
     <div className="projects grid grid4:grid-cols-4 grid3:grid-cols-3 grid2:grid-cols-2 grid1:grid-cols-1 bg-[#EFF5F4] p-4">
       {projects.map((project) => (

@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import ListAProject from "../ListAProject/ListAProject";
 import Search from "../Search/Search";
+import SearchIcon from "@mui/icons-material/Search";
 import Logo from "./logo_transparent.png";
 
 const AppBar = () => {
@@ -14,13 +15,17 @@ const AppBar = () => {
 
   let allProjects = JSON.parse(localStorage.getItem("projects")) || "";
 
-  
   const viewProjectsMap = () => {
     return (window.location.href = "/projects-map");
   };
 
   const goHome = () => {
     window.location.href = "/home";
+  };
+
+  const renderSearchBar = (string) => {
+    console.log(string);
+    return <Search details={allProjects} />;
   };
 
   const viewRewards = () => {
@@ -60,11 +65,17 @@ const AppBar = () => {
                 title="View All Projects On A Map"
               />
               <NavLink onClick={viewRewards} title="Rewards" />
-              <Search details={allProjects} />
             </div>
           </div>
+
+          <div
+            className="search"
+            style={{ position: "sticky", cursor: "pointer" }}
+          >
+            <Search details={allProjects} />
+          </div>
+          
           <div className="h-full">
-            
             {user === "" && <NavLink onClick={signIn} title="Sign In" />}
             {user !== "" && <NavLink onClick={logOut} title="Sign Out" />}
           </div>

@@ -18,12 +18,7 @@ import RegisterBusiness from './components/RegisterBusiness/RegisterBusiness';
 import ListAProject from './components/ListAProject/ListAProject';
 import AppBar from './components/Appbar/Appbar';
 
-function App() {
-  let cookie = new Cookies();
-  let user = cookie.get('signedInUser') || ''
-  
-  let myBusinesses = localStorage.getItem("myBusinesses");
-  
+function App() {  
   setProjectsToStorage()
   setBusinessesToStorage()
   updateStoredUserInfo()

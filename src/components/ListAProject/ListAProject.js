@@ -42,7 +42,7 @@ function ListAProject() {
     for (let i = 0; i < files.length; i++) {
       formData.append("images[]", files[i]);
     }
-    await listAProjectApiCall(formData, addressJson);
+    await listAProjectApiCall(formData);
     window.location.reload();
   };
 
@@ -60,7 +60,6 @@ function ListAProject() {
             <Modal
               className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
               isOpen={noBusinessModal}
-              style
               onClose={() => handleModalClose}
               onRequestClose={() => setNoBusinessModal(false)}
             >

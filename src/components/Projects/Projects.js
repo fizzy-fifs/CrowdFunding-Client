@@ -1,20 +1,19 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
-import { Navigate } from "react-router-dom";
-import Search from "../Search/Search";
+import LinearProgress from "@mui/material/LinearProgress";
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 function Projects() {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
   const cookie = new Cookies();
-  const user = cookie.get('signedInUser') || "";
+  const user = cookie.get("signedInUser") || "";
 
   const viewEachProduct = (projectId) => {
     if (user === "") {
-      return window.location.href = "/signin";
-    } 
-    return window.location.href = `/projects/${projectId}`
-  }
+      return (window.location.href = "/signin");
+    }
+    return (window.location.href = `/projects/${projectId}`);
+  };
 
   let allProjects = JSON.parse(localStorage.getItem("projects")) || "";
   return (
@@ -22,7 +21,7 @@ function Projects() {
       {projects.map((project) => (
         <div className="p-4">
           <div
-            className="w-full rounded-md h-[450px] overflow-hidden bg-white shadow-md"
+            className="w-full rounded-md h-[500px] overflow-hidden bg-white shadow-md"
             id="eachProjectCard"
           >
             <img
@@ -42,13 +41,27 @@ function Projects() {
                 >
                   {project.title}
                 </h5>
-              </header>
+              </header> <br />
               <p className="eachProjectCategory absolute top-0 bg-green-500 text-white font-medium px-3 py-1 translate-y-[-50%]">
                 {project.category}
               </p>
               <h6 className="eachProjectGoal">
                 Goal: <span className="text-green-500">${project.goal}</span>
               </h6>
+              <div
+                className="progressBar overflow-hidden green"
+                // style={{width: `${(project.amountRaised/project.goal) * 100}px`}}
+              >
+                <h6 className="text-left">
+                  Percentage Raised: <span className="text-green-500">
+                    {(project.amountRaised / project.goal) * 100}%
+                  </span>
+                </h6>
+                <ProgressBar
+                  width={300}
+                  percent={(project.amountRaised / project.goal) * 100}
+                /><br />
+              </div>
               <p className="text-left">
                 <span className="eachProjectDescription text-left text-sm text-gray-600 line-clamp-4">
                   {project.description}

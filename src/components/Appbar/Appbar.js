@@ -3,7 +3,6 @@ import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import ListAProject from "../ListAProject/ListAProject";
 import Search from "../Search/Search";
-import SearchIcon from "@mui/icons-material/Search";
 import Logo from "./logo_transparent.png";
 
 const AppBar = () => {

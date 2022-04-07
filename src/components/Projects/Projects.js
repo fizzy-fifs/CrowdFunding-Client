@@ -49,8 +49,7 @@ function Projects() {
                 Goal: <span className="text-green-500">${project.goal}</span>
               </h6>
               <div
-                className="progressBar overflow-hidden green"
-                // style={{width: `${(project.amountRaised/project.goal) * 100}px`}}
+                className="progressBar overflow-hidden"
               >
                 <h6 className="text-left">
                   Percentage Raised: <span className="text-green-500">

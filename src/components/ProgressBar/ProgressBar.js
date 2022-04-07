@@ -10,8 +10,8 @@ function ProgressBar ({ width, percent }) {
   
 
   return (
-    <div className="progress-div" style={{ width: `${width}px` }}>
-      <div style={{ width: `${value}px` }} className="progress"></div>
+    <div className="progress-div flex-none " style={{ width: `${width}px` }}>
+      <div style={{ width: `${value}px` }} className="progress h-full"></div>
     </div>
   );
 };

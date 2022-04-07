@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import MapContainer from "../Map/MapContainer";
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 function ProjectsById(props) {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
-  const cookie = new Cookies()
-  const user = cookie.get('signedInUser') || ''
+  const cookie = new Cookies();
+  const user = cookie.get("signedInUser") || "";
   const [amount, setAmount] = useState("");
 
   const donate = (projectId, amount, userId) => {
-    if (user === '') {
-      return window.location.href = "/signin"
+    if (user === "") {
+      return (window.location.href = "/signin");
     }
     window.location.href = `https://fundedlocal-server.herokuapp.com/api/v1.0/payments/${projectId}&${amount}&${userId}`;
   };
 
- 
   return (
     <div className="max-w-[1200px] m-auto bg-green-50">
       {projects
@@ -60,6 +60,16 @@ function ProjectsById(props) {
                   Goal:{" "}
                   <span className="text-green-500 font-medium text-lg">
                     ${filteredProject.goal}
+                  </span>
+                </div>
+                <div className="text-left overflow-hidden">
+                  Percentage Raised:{" "}
+                  <span className="text-green-500 font-medium text-lg">
+                  {(filteredProject.amountRaised / filteredProject.goal) * 100}%
+                    <ProgressBar
+                      width={300}
+                      percent={filteredProject.amountRaised / filteredProject.goal}
+                    />
                   </span>
                 </div>
               </div>

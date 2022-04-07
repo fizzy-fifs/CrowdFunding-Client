@@ -51,7 +51,7 @@ const AppBar = () => {
   }, []);
   return (
     <>
-      <div ref={ref} className="h-20 bg-white fixed z-50 w-full shadow-md">
+      <div ref={ref} className="h-20 bg-white  z-50 w-full shadow-md">
         <div className="max-w-[1080px] p-2 flex flex-row justify-between items-center h-full m-auto">
           <div className="flex flex-row items-center h-full">
             <div className="h-full cursor-pointer" onClick={goHome}>

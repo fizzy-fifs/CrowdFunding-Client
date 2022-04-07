@@ -17,7 +17,7 @@ function Search({ details }) {
   }
   return (
     <section className="garamond">
-      <div className="w-fit px-1 cursor-pointer border-b-0 border-[#fff0] transition-all hover:border-b-2 h-full flex flex-col justify-center">
+      {/* <div className="w-fit px-1 cursor-pointer border-b-0 border-[#fff0] transition-all hover:border-b-2 h-full flex flex-col justify-center"> */}
         <div className="searchInputs">
           <input
             className="b--none bg-lightest-blue ma3"
@@ -28,7 +28,7 @@ function Search({ details }) {
         </div>
         {filteredDetails.length != 0 && (
           <div className="dataResults">
-            {filteredDetails.slice(0, 10).map((value, key) => (
+            {filteredDetails.slice(0, 5).map((value, key) => (
               <div className="dataItem" onClick={() => goToProject(value.id)}>
                 {" "}
                 <p>{value.title} </p>
@@ -36,7 +36,7 @@ function Search({ details }) {
             ))}
           </div>
         )}
-      </div>
+      {/* </div> */}
     </section>
   );
 }

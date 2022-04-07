@@ -59,7 +59,7 @@ function Projects() {
                 </h6>
                 <ProgressBar
                   width={300}
-                  percent={(project.amountRaised / project.goal) * 100}
+                  percent={(project.amountRaised / project.goal)}
                 /><br />
               </div>
               <p className="text-left">

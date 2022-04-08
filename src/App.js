@@ -19,6 +19,7 @@ import AppBar from './components/Appbar/Appbar';
 import categoriesNotInLocalStorage from './helpers/categoriesNotInLocalStorage';
 import setCategoriesToLocalStorage from './setToStorage/setCategoriesToLocalStorage';
 import ViewClickedCategory from './components/ViewClickedCategory/ViewClickedCategory';
+import { ReactNotifications } from 'react-notifications-component';
 
 function App() {  
   setProjectsToStorage()
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <div className="App">
+      <ReactNotifications />
       <Router>
         <AnimatePresence exitBeforeEnter>
           <AppBar />

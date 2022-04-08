@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
 import Cookies from "universal-cookie";
 import listAProjectApiCall from "../../apiCalls/listAProjectApiCall";
-import { FaTimes, FaPlus } from 'react-icons/fa';
+import { FaTimes, FaPlus } from "react-icons/fa";
 
 function ListAProject() {
   const [modalState, setModalState] = useState(false);
@@ -16,13 +16,15 @@ function ListAProject() {
   if (typeof myBusinesses === "object") myBusinesses = [myBusinesses];
   let myBusinessesLength = myBusinesses.length;
 
+  let categories = JSON.parse(localStorage.getItem("categories")) || [];
+
   const registerABusiness = () => {
     return (window.location.href = "/register-a-business");
   };
 
   const handleModalClose = () => {
-    setNoBusinessModal(false)
-  }
+    setNoBusinessModal(false);
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -55,25 +57,24 @@ function ListAProject() {
             className="w-fit px-3 cursor-pointer border-b-0 border-[#fff0] transition-all hover:border-b-2 hover:border-green-500 h-full flex flex-col justify-center"
           >
             <div className="font-medium text-gray-700">List A Project</div>
-            <div className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" >
-
-            <Modal
-              className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
-              isOpen={noBusinessModal}
-              onClose={() => handleModalClose}
-              onRequestClose={() => setNoBusinessModal(false)}
-            >
-              <div className="flex flex-col text-left h-[500px] justify-center px-5 bg-gradient-to-br to-[#dff6f1] from-[#dff6f155]">
-                <div className="max-w-[1080px] mx-auto">
-                  <h1
-                    className="NoBusiness text-7xl max-w-[50%] mb-3 cursor-pointer"
-                    onClick={registerABusiness}
-                  >
-                    Click Here To Register A Business First
-                  </h1>
+            <div className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+              <Modal
+                className="flex justify-center items-center w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+                isOpen={noBusinessModal}
+                onClose={() => handleModalClose}
+                onRequestClose={() => setNoBusinessModal(false)}
+              >
+                <div className="flex flex-col text-left h-[500px] justify-center px-5 bg-gradient-to-br to-[#dff6f1] from-[#dff6f155]">
+                  <div className="max-w-[1080px] mx-auto">
+                    <h1
+                      className="NoBusiness text-7xl max-w-[50%] mb-3 cursor-pointer"
+                      onClick={registerABusiness}
+                    >
+                      Click Here To Register A Business First
+                    </h1>
+                  </div>
                 </div>
-              </div>
-            </Modal>
+              </Modal>
             </div>
           </div>
         );
@@ -90,8 +91,8 @@ function ListAProject() {
           isOpen={modalState}
           onRequestClose={() => setModalState(false)}
         >
-           {/* <header > */}
-            {/* <FaTimes className="items-right text-center" style={{color: 'red', cursor: 'pointer', display: 'inline'}} onClick={() => setModalState(false)}  /> */}
+          {/* <header > */}
+          {/* <FaTimes className="items-right text-center" style={{color: 'red', cursor: 'pointer', display: 'inline'}} onClick={() => setModalState(false)}  /> */}
           {/* </header> */}
           <div className="bg-white w-[80vw] flex flex-grow overflow-y-hidden h-[90vh] p-1 shadow-lg flex-col items-center rounded-md">
             <form
@@ -108,15 +109,10 @@ function ListAProject() {
 
               <select name="category" className="form-input">
                 <option default>Please select a relevant category</option>
-                <option name="Arts">Arts</option>
-                <option name="ComicsAndIllustration">
-                  Comics And Illustration
-                </option>
-                <option name="DesignAndTech">Design And Tech</option>
-                <option name="Film">Film</option>
-                <option name="FoodAndCraft">Food And Craft</option>
-                <option name="Games">Games</option>
-                <option name="Music">Music</option> required
+                {categories.map((category) => {return (
+                  <option key={category} name={category}>{category}</option>
+                )})}{" "}
+                required
               </select>
 
               <textarea

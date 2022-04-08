@@ -1,6 +1,5 @@
-
 const businessIsNotInLocalStorage = () => {
-  return !localStorage.getItem('business') ? true : false;
-}
+  return !localStorage.getItem("business") ? true : false;
+};
 
-export default businessIsNotInLocalStorage
+export default businessIsNotInLocalStorage;

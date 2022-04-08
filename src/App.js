@@ -9,7 +9,6 @@ import setProjectsToStorage from './setToStorage/setProjectsToStorage';
 import setBusinessesToStorage from './setToStorage/setBusinessesToStorage';
 import updateStoredUserInfo from './setToStorage/updateStoredUserInfo';
 import ViewClickedProject from './components/ViewClickedProject/ViewClickedProject';
-import Cookies from 'universal-cookie';
 import PaymentsSuccess from './components/PaymentsSuccess/PaymentsSuccess';
 import setMyBusinessesToStorage from './setToStorage/setMyBusinessesToStorage';
 import MapWithAllProjects from './components/MapWithAllProjects';
@@ -17,12 +16,16 @@ import Rewards from './components/Rewards/Rewards';
 import RegisterBusiness from './components/RegisterBusiness/RegisterBusiness';
 import ListAProject from './components/ListAProject/ListAProject';
 import AppBar from './components/Appbar/Appbar';
+import categoriesNotInLocalStorage from './helpers/categoriesNotInLocalStorage';
+import setCategoriesToLocalStorage from './setToStorage/setCategoriesToLocalStorage';
 
 function App() {  
   setProjectsToStorage()
   setBusinessesToStorage()
   updateStoredUserInfo()
   setMyBusinessesToStorage()
+
+  if (categoriesNotInLocalStorage()){ setCategoriesToLocalStorage() }
 
   return (
     <div className="App">

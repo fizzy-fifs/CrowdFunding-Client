@@ -1,10 +1,9 @@
 import React from "react";
 import Cookies from "universal-cookie";
-import LinearProgress from "@mui/material/LinearProgress";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 function Projects() {
-  const projects = JSON.parse(localStorage.getItem("projects")) || "";
+  const projects = JSON.parse(localStorage.getItem("projects")) || [];
   const cookie = new Cookies();
   const user = cookie.get("signedInUser") || "";
 
@@ -15,7 +14,6 @@ function Projects() {
     return (window.location.href = `/projects/${projectId}`);
   };
 
-  let allProjects = JSON.parse(localStorage.getItem("projects")) || "";
   return (
     <div className="projects grid grid4:grid-cols-4 grid3:grid-cols-3 grid2:grid-cols-2 grid1:grid-cols-1 bg-[#EFF5F4] p-4">
       {projects.map((project) => (
@@ -41,25 +39,26 @@ function Projects() {
                 >
                   {project.title}
                 </h5>
-              </header> <br />
+              </header>{" "}
+              <br />
               <p className="eachProjectCategory absolute top-0 bg-green-500 text-white font-medium px-3 py-1 translate-y-[-50%]">
                 {project.category}
               </p>
               <h6 className="eachProjectGoal">
                 Goal: <span className="text-green-500">${project.goal}</span>
               </h6>
-              <div
-                className="progressBar overflow-hidden"
-              >
+              <div className="progressBar overflow-hidden">
                 <h6 className="text-left">
-                  Percentage Raised: <span className="text-green-500">
+                  Percentage Raised:{" "}
+                  <span className="text-green-500">
                     {(project.amountRaised / project.goal) * 100}%
                   </span>
                 </h6>
                 <ProgressBar
                   width={300}
-                  percent={(project.amountRaised / project.goal)}
-                /><br />
+                  percent={project.amountRaised / project.goal}
+                />
+                <br />
               </div>
               <p className="text-left">
                 <span className="eachProjectDescription text-left text-sm text-gray-600 line-clamp-4">

@@ -18,6 +18,7 @@ import ListAProject from './components/ListAProject/ListAProject';
 import AppBar from './components/Appbar/Appbar';
 import categoriesNotInLocalStorage from './helpers/categoriesNotInLocalStorage';
 import setCategoriesToLocalStorage from './setToStorage/setCategoriesToLocalStorage';
+import ViewClickedCategory from './components/ViewClickedCategory/ViewClickedCategory';
 
 function App() {  
   setProjectsToStorage()
@@ -44,6 +45,7 @@ function App() {
               <Route path="/my-rewards" exact element={<Rewards />} />
               <Route path="/register-a-business" exact element={<RegisterBusiness />} />
               <Route path="/list-a-project" exact element={<ListAProject />} />
+              <Route path="/categories/:category" exact element={<ViewClickedCategory />} />
 
           </Routes>
         </AnimatePresence>

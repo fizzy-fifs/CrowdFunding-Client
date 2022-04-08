@@ -2,11 +2,7 @@ import React from "react";
 import Cookies from "universal-cookie";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-function Projects() {
-  const projects = JSON.parse(localStorage.getItem("projects")) || [];
-  const cookie = new Cookies();
-  const user = cookie.get("signedInUser") || "";
-
+function Projects({ projects, user }) {
   const viewEachProduct = (projectId) => {
     if (user === "") {
       return (window.location.href = "/signin");
@@ -49,11 +45,14 @@ function Projects() {
               </h6>
               <div className="progressBar overflow-hidden">
                 <h6 className="text-left">
-                  Percentage Raised:{" "}
+                  Amount Raised:{" "}
                   <span className="text-green-500">
-                    {(project.amountRaised / project.goal) * 100}%
+                    ${project.amountRaised}
                   </span>
                 </h6>
+                <span className="text-green-500 text-right">
+                  {(project.amountRaised / project.goal) * 100}%
+                </span>
                 <ProgressBar
                   width={300}
                   percent={project.amountRaised / project.goal}

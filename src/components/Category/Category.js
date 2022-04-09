@@ -12,10 +12,11 @@ function Category() {
       {categories.map((category) => (
         <div className="p-4">
           <div
-            className="w-full rounded-md h-[50px] w-[200px] overflow-hidden bg-white shadow-md"
+            className="w-full cursor-pointer rounded-md h-[100px] w-[300px]  overflow-hidden bg-white shadow-md"
             id="eachCategoryCard"
+            onClick={() => viewClickedCategory(category)}
           >
-            <h4 className="cursor-pointer font-bold text-left line-clamp-2" onClick={() => viewClickedCategory(category)}>
+            <h4 className=" font-bold items-center text-center line-clamp-2" >
               {category}
             </h4>
           </div>

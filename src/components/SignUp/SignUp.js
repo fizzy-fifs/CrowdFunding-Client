@@ -25,14 +25,12 @@ function SignUp() {
         }
       )
       .then((res) => {
-        console.log(res)
         if (res.data.name) {
           cookies.set("signedInUser", res.data.user);
           cookies.set("jwt", res.data.jwt);
           setRedirect(true);
           addNotification(`Welcome ${res.data.name}`, "success");
         } else {
-          console.log(res)
           addNotification(res.data, "danger")
         }
       });

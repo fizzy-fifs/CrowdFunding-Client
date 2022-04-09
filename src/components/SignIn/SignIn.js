@@ -31,7 +31,6 @@ function SignIn() {
         data
       )
       .then((res) => {
-        console.log(res);
         if (res.data.name) {
           cookies.set("signedInUser", res.data.user);
           cookies.set("jwt", res.data.jwt);

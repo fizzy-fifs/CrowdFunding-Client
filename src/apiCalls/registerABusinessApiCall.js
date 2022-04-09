@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import addNotification from "../components/Notifications/Notifications";
 
 const registerABusinessApiCall = async (formData) => {
   let cookies = new Cookies();
@@ -25,9 +26,11 @@ const registerABusinessApiCall = async (formData) => {
     }
     }
   ).then((res) => {
-    if (res.status === 200) {
-      myBusinesses.push(JSON.stringify(res.data))
+    if (res.data.name) {
+      myBusinesses.push(JSON.stringify(res.data.business))
       localStorage.setItem("myBusinesses",  myBusinesses)  
+    } else{
+      addNotification(res.data, "danger")
     }
   })
 };

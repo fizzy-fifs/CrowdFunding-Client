@@ -10,10 +10,9 @@ const addNotification = (msg, type) => {
 		animationIn: ['animated', 'fadeIn'],
 		animationOut: ['animated', 'fadeOut'],
 		dismiss: {
-			duration: 2000
+			duration: 4000
 		}
 	});
 };
 
 export default addNotification;
- 

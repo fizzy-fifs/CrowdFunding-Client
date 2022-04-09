@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import addNotification from "../Notifications/Notifications";
 
 function SignUp() {
   const [user, setUser] = useState("");
@@ -24,13 +25,15 @@ function SignUp() {
         }
       )
       .then((res) => {
-        if (res.status === 200) {
+        console.log(res)
+        if (res.data.name) {
           cookies.set("signedInUser", res.data.user);
           cookies.set("jwt", res.data.jwt);
           setRedirect(true);
-          console.log(res.data);
+          addNotification(`Welcome ${res.data.name}`, "success");
         } else {
-          console.log(res.data);
+          console.log(res)
+          addNotification(res.data, "danger")
         }
       });
   };

@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 import setProjectsToStorage from "../../setToStorage/setProjectsToStorage";
 import setBusinessesToStorage from "../../setToStorage/setBusinessesToStorage";
 import setMyBusinessesToStorage from "../../setToStorage/setMyBusinessesToStorage";
-import addNotification from "../../Notifications/Notifications";
+import addNotification from "../Notifications/Notifications";
 
 function SignIn() {
   const [redirect, setRedirect] = useState(false);
@@ -31,17 +31,14 @@ function SignIn() {
         data
       )
       .then((res) => {
-        if (res.status === 200) {
+        console.log(res);
+        if (res.data.name) {
           cookies.set("signedInUser", res.data.user);
           cookies.set("jwt", res.data.jwt);
-          
-          console.log(res)
-          setRedirect(true);
           addNotification(`Welcome ${res.data.name}`, "success");
+          setRedirect(true);
         } else {
-          cookies.set("response", res.body)
-          addNotification("Invalid email or password", "danger")
-          console.log(res);
+          addNotification(res.data, "danger");
         }
       });
   };

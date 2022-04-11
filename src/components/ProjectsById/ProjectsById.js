@@ -13,7 +13,7 @@ function ProjectsById(props) {
     if (user === "") {
       return (window.location.href = "/signin");
     }
-    window.location.href = `https://fundedlocal-server.herokuapp.com/api/v1.0/payments/${projectId}&${amount}&${userId}`;
+    window.location.href = `http://localhost:8080/api/v1.0/payments/${projectId}&${amount}&${userId}`;
   };
 
   return (

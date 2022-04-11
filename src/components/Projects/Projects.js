@@ -13,7 +13,7 @@ function Projects({ projects, user }) {
   return (
     <div className="projects grid grid4:grid-cols-4 grid3:grid-cols-3 grid2:grid-cols-2 grid1:grid-cols-1 bg-[#EFF5F4] p-4">
       {projects.map((project) => (
-        <div className="p-4">
+        <div className="p-4 cursor-pointer" onClick={() => viewEachProduct(project.id)}>
           <div
             className="w-full rounded-md h-[500px] overflow-hidden bg-white shadow-md"
             id="eachProjectCard"
@@ -29,10 +29,7 @@ function Projects({ projects, user }) {
               className="flex flex-col items-start relative p-4"
             >
               <header>
-                <h5
-                  className="cursor-pointer font-bold text-left line-clamp-2"
-                  onClick={() => viewEachProduct(project.id)}
-                >
+                <h5 className=" font-bold text-left line-clamp-2">
                   {project.title}
                 </h5>
               </header>{" "}

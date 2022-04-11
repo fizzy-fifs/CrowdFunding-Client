@@ -15,7 +15,7 @@ function Home() {
             Explore Categories
           </header>
         </div>{" "}
-        <div className="place-items-center h-screen bg-[#EFF5F4] p-4">
+        <div className="place-items-center content-center h-screen bg-[#EFF5F4] p-4">
           <Category /> <Projects projects={projects} user={user} />
         </div>
       </div>

@@ -58,6 +58,11 @@ const AppBar = () => {
             </div>
 
             <div className="flex flex-row h-full ">
+            <NavLink
+                onClick={goHome}
+                title="Explore"
+              />
+             
               <ListAProject />
               <NavLink
                 onClick={viewProjectsMap}

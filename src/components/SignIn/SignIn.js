@@ -35,7 +35,8 @@ function SignIn() {
           cookies.set("signedInUser", res.data.user);
           cookies.set("jwt", res.data.jwt);
           addNotification(`Welcome ${res.data.name}`, "success");
-          setRedirect(true);
+          window.location.href !== "/signin" ? setRedirect(false) : setRedirect(true);
+          window.location.reload();
         } else {
           addNotification(res.data, "danger");
         }
@@ -48,6 +49,7 @@ function SignIn() {
     setMyBusinessesToStorage();
     return <Navigate to="/home" />;
   }
+  
 
   return (
     <div className="Signup h-[100vh] w-full flex flex-col justify-center items-center bg-[#EFF5F4]">

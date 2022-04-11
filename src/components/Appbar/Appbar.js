@@ -28,9 +28,7 @@ const AppBar = () => {
   };
 
   const viewRewards = () => {
-    if (user === "") {
-      return (window.location.href = "/signin");
-    }
+    
     window.location.href = "/my-rewards";
   };
 

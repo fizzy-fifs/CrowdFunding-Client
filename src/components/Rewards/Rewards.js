@@ -3,12 +3,18 @@ import Cookies from "universal-cookie";
 import fetchProjectsById from "../../apiCalls/fetchProjectsById";
 import updateStoredUserInfo from "../../setToStorage/updateStoredUserInfo";
 import background from "./images/background.jpg";
+import SignIn from "../SignIn/SignIn"
 
 function Rewards() {
   updateStoredUserInfo();
   const cookie = new Cookies();
-  let user = cookie.get("signedInUser");
+  let user = cookie.get("signedInUser") || "";
   let rewards = user.earnedRewards;
+
+
+  if (user === "") {
+    return <SignIn />;
+  }
 
   if (!rewards) {
     return (
@@ -45,12 +51,16 @@ function Rewards() {
           </div>
         </div>
       </div>
-      <div className="signup-in flex flex-col flex-1 bg-[#5ff398] h-full justify-center items-center">
+      <div className=" flex flex-col flex-1 bg-[#5ff398] h-full justify-center overflow-auto items-center">
         {rewards.map((reward) => (
-          <div className="text-2xl max-w-[50%] mb-3 text-grey font-medium text-[50px] drop-shadow">
+          <div className="text-base text-justify max-w-[50%] mb-3 text-grey font-medium text-[50px] drop-shadow ">
             <p className="text-center">
-               {reward.name}{" "}
+              Reward: {reward.name}
             </p>
+            <p className="text-center">
+              Reward ID: {reward.id} {" "}
+            </p>
+            <br />
           </div>
         ))}
       </div>

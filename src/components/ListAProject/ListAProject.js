@@ -14,7 +14,7 @@ function ListAProject() {
   let user = cookies.get("signedInUser") || "";
   let myBusinesses = JSON.parse(localStorage.getItem("myBusinesses")) || "";
   if (typeof myBusinesses === "object") myBusinesses = [myBusinesses];
-  let myBusinessesLength = myBusinesses.length;
+  // let myBusinessesLength = myBusinesses.length;
 
   let categories = JSON.parse(localStorage.getItem("categories")) || [];
 
@@ -50,7 +50,7 @@ function ListAProject() {
 
   {
     {
-      if (myBusinessesLength === 0)
+      if (myBusinesses.length == 0 || myBusinesses == "")
         return (
           <div
             onClick={() => setNoBusinessModal(true)}

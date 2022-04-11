@@ -35,8 +35,12 @@ function SignIn() {
           cookies.set("signedInUser", res.data.user);
           cookies.set("jwt", res.data.jwt);
           addNotification(`Welcome ${res.data.name}`, "success");
-          window.location.href !== "/signin" ? setRedirect(false) : setRedirect(true);
-          window.location.reload();
+          if (window.location.href !== "/signin") {
+            setRedirect(false)
+            // window.location.reload();
+          }
+          setRedirect(true);
+          
         } else {
           addNotification(res.data, "danger");
         }

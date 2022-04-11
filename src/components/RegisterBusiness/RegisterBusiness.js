@@ -1,9 +1,8 @@
 import { React, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
-import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import registerABusinessApiCall from "../../apiCalls/registerABusinessApiCall";
-import { NavLink } from "react-router-dom";
+import SignIn from "../SignIn/SignIn";
 
 function RegisterBusiness() {
   const [modalState, setModalState] = useState(false);
@@ -31,7 +30,7 @@ function RegisterBusiness() {
   };
 
   if (user === "") {
-    return  window.location.href = "/signin";
+    return <SignIn />;
   } else {
     return (
       <div className="RegisterBusinessContainer">

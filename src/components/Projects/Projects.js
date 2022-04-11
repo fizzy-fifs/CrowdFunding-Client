@@ -4,9 +4,6 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 
 function Projects({ projects, user }) {
   const viewEachProduct = (projectId) => {
-    if (user === "") {
-      return (window.location.href = "/signin");
-    }
     return (window.location.href = `/projects/${projectId}`);
   };
 

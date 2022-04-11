@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import MapContainer from "../Map/MapContainer";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import SignIn from "../SignIn/SignIn"
 
 function ProjectsById(props) {
   const projects = JSON.parse(localStorage.getItem("projects")) || "";
@@ -15,6 +16,10 @@ function ProjectsById(props) {
     }
     window.location.href = `https://fundedlocal-server.herokuapp.com/api/v1.0/payments/${projectId}&${amount}&${userId}`;
   };
+
+  if (user === "") {
+    return <SignIn />;
+  }
 
   return (
     <div className="max-w-[1200px] m-auto bg-green-50">

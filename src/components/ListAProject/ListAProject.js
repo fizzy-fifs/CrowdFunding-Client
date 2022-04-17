@@ -9,6 +9,7 @@ function ListAProject() {
   const [noBusinessModal, setNoBusinessModal] = useState(false);
   const [files, setFiles] = useState([]);
   const [address, setAddress] = useState({});
+  const [reward, setReward] = useState({});
 
   let cookies = new Cookies();
   let user = cookies.get("signedInUser") || "";
@@ -30,6 +31,7 @@ function ListAProject() {
     event.preventDefault();
 
     let addressJson = JSON.stringify(address);
+    let rewardJson = JSON.stringify(reward);
 
     const formData = new FormData(event.target);
 
@@ -40,6 +42,7 @@ function ListAProject() {
     formData.set("endDate", formData.get("endDate"));
     formData.set("businessId", formData.get("business"));
     formData.set("address", addressJson);
+    formData.set("reward", rewardJson);
 
     for (let i = 0; i < files.length; i++) {
       formData.append("images[]", files[i]);
@@ -109,9 +112,13 @@ function ListAProject() {
 
               <select name="category" className="form-input">
                 <option default>Please select a relevant category</option>
-                {categories.map((category) => {return (
-                  <option key={category} name={category}>{category}</option>
-                )})}{" "}
+                {categories.map((category) => {
+                  return (
+                    <option key={category} name={category}>
+                      {category}
+                    </option>
+                  );
+                })}{" "}
                 required
               </select>
 
@@ -238,6 +245,51 @@ function ListAProject() {
                   }
                 />
               </div>
+
+              <br />
+              <h6>Rewards</h6>
+
+              <input
+                className="form-input"
+                type="number"
+                placeholder="Set amount for lower reward threshold "
+                onChange={(event) =>
+                  setReward({ ...reward, minimumThreshold: event.target.value })
+                }
+              />
+
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Set reward for lower threshold"
+                onChange={(event) =>
+                  setReward({
+                    ...reward,
+                    minimumThresholdReward: event.target.value,
+                  })
+                }
+              />
+
+              <input
+                className="form-input"
+                type="number"
+                placeholder="Set amount for higher reward threshold"
+                onChange={(event) =>
+                  setReward({ ...reward, higherThreshold: event.target.value })
+                }
+              />
+
+              <input
+                className="form-input"
+                type="number"
+                placeholder="Set reward for higher threshold"
+                onChange={(event) =>
+                  setReward({
+                    ...reward,
+                    higherThresholdReward: event.target.value,
+                  })
+                }
+              />
 
               <input className="form-btn w-full" type="submit" value="Submit" />
             </form>
